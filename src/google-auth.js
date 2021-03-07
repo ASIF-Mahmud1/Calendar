@@ -27,7 +27,7 @@ import {
     } catch (error) {
       const errorMessage =
         error.code === statusCodes.SIGN_IN_REQUIRED ? '' : error.message;
-       console.log(" Google Auth Error ",error)
+      // console.log(" Google Auth Error ",error)
        return  await  error
        
     }

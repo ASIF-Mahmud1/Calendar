@@ -14,6 +14,8 @@ import {listCalendar, createEvent, listEvents} from './google-calendar.api'
 import {event} from '../sample/data/Event'
 import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
+import {getIBMToken} from './utils/ibm-auth'
+import {predictEmailTag} from './utils/ibm-predict-api'
 export default class extends React.Component {
     state ={
         loggedIn: false,
@@ -69,6 +71,12 @@ export default class extends React.Component {
        this.setState({allEvents: result.items? result.items: []})
         console.log("List Events response ", result)
     }  
+
+    handleIBMToken =async()=>{
+       let response =await getIBMToken("dfsd")
+       let result= await predictEmailTag(response.access_token)
+       alert(JSON.stringify(result))
+    }
     render()
     {
         return(
@@ -77,6 +85,11 @@ export default class extends React.Component {
                     Calendar Component
                 </Text>
                 <ScrollView>
+                       <TouchableOpacity 
+                          style= {styles.signIn}   
+                          onPress={()=>{this.handleIBMToken() }} >
+                            <Text style= {styles.text}>Get IBM Token</Text>
+                       </TouchableOpacity>
                 {
                     this.state.loggedIn ==false ? 
                     <TouchableOpacity 
