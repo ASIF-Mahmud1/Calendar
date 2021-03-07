@@ -1,10 +1,9 @@
 
 
-
+import {IBM_ApiKey} from '../../credentials'
 const getIBMToken= async (apikey)=>{
 
-    const api_key =""// process.env['webClientId']
-    alert(api_key)
+    const api_key =IBM_ApiKey
     const url= "https://iam.ng.bluemix.net/identity/token"
     try {
       let response = await fetch(url, {

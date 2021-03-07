@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import {configureGoogleSignIn, getCurrentUser, signIn, signOut} from './google-auth'
 import {listCalendar, createEvent, listEvents} from './google-calendar.api'
-import {event} from '../sample/data/Event'
+import {event} from '../../sample/data/Event'
 import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
-import {getIBMToken} from './utils/ibm-auth'
-import {predictEmailTag} from './utils/ibm-predict-api'
+import {getIBMToken} from '.././utils/ibm-auth'
+import {predictEmailTag} from '.././utils/ibm-predict-api'
 export default class extends React.Component {
     state ={
         loggedIn: false,

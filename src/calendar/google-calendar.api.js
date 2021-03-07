@@ -1,4 +1,4 @@
-import { url} from '../config/config'
+import { url} from '../../config/config'
 const listCalendar = async (accessToken) => {
     try {
       let response = await fetch(url+'/users/me/calendarList', {

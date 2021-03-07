@@ -1,3 +1,4 @@
+import {webClientId} from '../../credentials'
 import {
     GoogleSignin,
     GoogleSigninButton,
@@ -6,7 +7,7 @@ import {
 
   const  configureGoogleSignIn=()=> {
     GoogleSignin.configure({
-      webClientId: process.env.webClientId,
+      webClientId: webClientId,
       offlineAccess: false,
       scopes: [
                'https://www.googleapis.com/auth/calendar.readonly',
@@ -18,11 +19,9 @@ import {
 
   const getCurrentUser= async()=> {
     try {
-      const userInfo = await GoogleSignin.signInSilently();
-     
+        const userInfo = await GoogleSignin.signInSilently();
         const isSignedIn = await GoogleSignin.getTokens();
-        console.log(isSignedIn)
-         return  await {success :isSignedIn}
+        return  await {success :isSignedIn}
       
     } catch (error) {
       const errorMessage =
@@ -37,7 +36,7 @@ import {
   
     try {
       await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
+        const userInfo = await GoogleSignin.signIn();
         const isSignedIn = await GoogleSignin.getTokens();
         return  await {success :isSignedIn}
     } catch (error) {
