@@ -1,172 +1,195 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  Button
+    SafeAreaView,
+    StyleSheet,
+    ScrollView,
+    View,
+    Text,
+    StatusBar,
+    TouchableOpacity,
+    Button
 } from 'react-native';
-import {configureGoogleSignIn, getCurrentUser, signIn, signOut} from './google-auth'
-import {listCalendar, createEvent, listEvents} from './google-calendar.api'
-import {event} from '../../sample/data/Event'
+import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from './google-auth'
+import { listCalendar, createEvent, listEvents } from './google-calendar.api'
+// import {event} from '../../sample/data/Event'
 import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
-import {getIBMToken} from '.././utils/ibm-auth'
-import {predictEmailTag} from '.././utils/ibm-predict-api'
+import { getIBMToken } from '.././utils/ibm-auth'
+import { predictEmailTag } from '.././utils/ibm-predict-api'
+import { Header, Label, Picker, Left } from "native-base";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+
 export default class extends React.Component {
-    state ={
+    state = {
         loggedIn: false,
         accessToken: '',
-        calendars:[],
-        allEvents:[],
+        calendars: [],
+        allEvents: [],
     }
 
-    componentDidMount= async()=>{
+    componentDidMount = async () => {
         configureGoogleSignIn()
         let response = await getCurrentUser();
-        if(response.success)
-        {
-            this.setState({accessToken: response.success.accessToken, loggedIn: true})
+        if (response.success) {
+            this.setState({ accessToken: response.success.accessToken, loggedIn: true })
         }
-        else 
-        {
-            this.setState({loggedIn:false})
+        else {
+            this.setState({ loggedIn: false })
         }
     }
-    handleSignOut= async()=>{
-        let response= await signOut()
-        if(response.success)
-        {
-            this.setState({loggedIn:false})
+    handleSignOut = async () => {
+        let response = await signOut()
+        if (response.success) {
+            this.setState({ loggedIn: false })
         }
     }
 
-    handleSignIn= async()=>{
-        let response= await signIn()
-        if(response.success)
-        {
-            this.setState({loggedIn:true, accessToken: response.success.accessToken})
+    handleSignIn = async () => {
+        let response = await signIn()
+        if (response.success) {
+            this.setState({ loggedIn: true, accessToken: response.success.accessToken })
         }
     }
-    listAllCalendar=async()=>{
-        const {accessToken} =this.state
-        let result= await listCalendar(accessToken)
-        this.setState({calendars: result.items})
+    listAllCalendar = async () => {
+        const { accessToken } = this.state
+        let result = await listCalendar(accessToken)
+        this.setState({ calendars: result.items })
         console.log(result)
-    } 
-    handleCreateEvent = async()=>{
-        const {accessToken} =this.state
-        const calendarId= "asif01050105@gmail.com"
-        let result = await createEvent(accessToken,calendarId,event)
+    }
+    handleCreateEvent = async () => {
+        const { accessToken } = this.state
+        const calendarId = "asif01050105@gmail.com"
+        let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
-    handleListEvents = async(calendarId)=>{
-        const {accessToken} =this.state
-      //  const calendarId= "asif01050105@gmail.com"
-       calendarId = calendarId.replace("#", "%23")
-        let result = await listEvents(accessToken,calendarId)
-       this.setState({allEvents: result.items? result.items: []})
+    handleListEvents = async (calendarId) => {
+        const { accessToken } = this.state
+        //  const calendarId= "asif01050105@gmail.com"
+        calendarId = calendarId.replace("#", "%23")
+        let result = await listEvents(accessToken, calendarId)
+        this.setState({ allEvents: result.items ? result.items : [] })
         console.log("List Events response ", result)
-    }  
-
-    handleIBMToken =async()=>{
-       let response =await getIBMToken("dfsd")
-       let result= await predictEmailTag(response.access_token)
-       alert(JSON.stringify(result))
     }
-    render()
-    {
-        return(
+
+    handleIBMToken = async () => {
+        let response = await getIBMToken("dfsd")
+        let result = await predictEmailTag(response.access_token)
+        alert(JSON.stringify(result))
+    }
+    render() {
+        return (
             <View>
-                <Text>
+                {/* <Text>
                     Calendar Component
-                </Text>
+                </Text> */}
+                <Header>
+                    {
+                        this.state.loggedIn == false ?
+                            <View >
+                                <TouchableOpacity
+                                    style={{ marginTop: 15, marginLeft: 250 }}
+                                    // style={styles.signIn}
+                                    onPress={() => { this.handleSignIn() }} >
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <FontAwesomeIcon icon={faSignInAlt} style={{ color: 'white', marginTop: 5 }} size={20} />
+
+                                        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5 }}>Login</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            <View style={{ marginTop: 10, width: 100, marginLeft: 250 }} >
+                                <TouchableOpacity
+                                    // style={styles.signOut}
+                                    onPress={() => { this.handleSignOut() }}
+                                >
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <FontAwesomeIcon icon={faSignOutAlt} style={{ color: 'white', marginTop: 5, marginLeft: 10 }} size={20} />
+
+                                        <Text style={{ fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5, fontSize: 20, marginRight: 10 }}>Logout</Text>
+                                    </View>
+
+                                </TouchableOpacity>
+                            </View>
+                    }
+
+
+                </Header>
+
                 <ScrollView>
-                       <TouchableOpacity 
-                          style= {styles.signIn}   
-                          onPress={()=>{this.handleIBMToken() }} >
-                            <Text style= {styles.text}>Get IBM Token</Text>
-                       </TouchableOpacity>
-                {
-                    this.state.loggedIn ==false ? 
-                    <TouchableOpacity 
-                    style= {styles.signIn}   
-                    onPress={()=>{this.handleSignIn() }} >
-                          <Text style= {styles.text}>Login</Text>
-                  </TouchableOpacity>
-                  :
-                  <TouchableOpacity 
-                  style= {styles.signOut}   
-                  onPress={()=>{this.handleSignOut() }}
-                  >
-                    <Text style= {styles.text}>Logout</Text>
-                </TouchableOpacity>
-                }
-                {
-                    this.state.loggedIn && 
-                    <>
-                      <TouchableOpacity 
-                          style= {styles.signIn}   
-                          onPress={()=>{this.listAllCalendar() }} >
-                            <Text style= {styles.text}>Get All Calendars</Text>
-                       </TouchableOpacity>
-                      <ListCalendars calendars ={this.state.calendars} handleListEvents={this.handleListEvents} />
-                     
+                    {
+                        this.state.loggedIn == false ?
+                            <View>
+                                <Text style={{ fontSize: 20, fontWeight: "bold" }}>You need to LogIn</Text>
+                            </View>
+                            :
+                            <View>
 
-                     {/* <TouchableOpacity 
-                        style= {styles.signIn}   
-                        onPress={()=>{this.handleListEvents("en.bd%23holiday@group.v.calendar.google.com") }} >
-                            <Text style= {styles.text}>Get All Events</Text>
-                     </TouchableOpacity> */}
-                     <ListEvents allEvents = {this.state.allEvents}/>
+                            </View>
+                    }
 
-                     <TouchableOpacity 
-                        style= {styles.createEvent}   
-                        onPress={()=>{this.handleCreateEvent() }} >
-                            <Text style= {styles.text}>Create New Event</Text>
-                     </TouchableOpacity>
-                    </>
-                    
-                }
-            </ScrollView>
 
-              
+                    {
+                        this.state.loggedIn &&
+                        <>
+                            <TouchableOpacity
+                                style={styles.signIn}
+                                onPress={() => { this.handleIBMToken() }} >
+                                <Text style={styles.text}>Get IBM Token</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.signIn}
+                                onPress={() => { this.listAllCalendar() }} >
+                                <Text style={styles.text}>Get All Calendars</Text>
+                            </TouchableOpacity>
+                            <ListCalendars calendars={this.state.calendars} handleListEvents={this.handleListEvents} />
+                            <ListEvents allEvents={this.state.allEvents} />
+
+                            <TouchableOpacity
+                                style={styles.createEvent}
+                                onPress={() => { this.handleCreateEvent() }} >
+                                <Text style={styles.text}>Create New Event</Text>
+                            </TouchableOpacity>
+                        </>
+
+                    }
+                </ScrollView>
+
+
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    text:{
-        fontSize:20,
-        color:'white',
-        fontWeight:"bold"
+    text: {
+        fontSize: 20,
+        color: 'white',
+        fontWeight: "bold"
     },
-    signIn:{
-       backgroundColor: '#71DEA3',
-       alignItems:'center',
-       marginVertical:"10%",
-       paddingVertical:"5%",
-       paddingHorizontal: "5%",
-       marginVertical: "5%",
-   },
-   signOut: {
-    backgroundColor: '#D91010',   
-    alignItems:'center',
-    marginVertical:"10%",
-    paddingVertical:"5%",
-    paddingHorizontal: "5%",
-    marginVertical: "5%",
-   },
-   createEvent:{
-    backgroundColor: '#841584',
-    alignItems:'center',
-    marginVertical:"10%",
-    paddingVertical:"5%",
-    paddingHorizontal: "5%",
-    marginVertical: "5%",
-},
-  });
+    signIn: {
+        backgroundColor: '#71DEA3',
+        alignItems: 'center',
+        marginVertical: "10%",
+        paddingVertical: "5%",
+        paddingHorizontal: "5%",
+        marginVertical: "5%",
+    },
+    signOut: {
+        backgroundColor: '#D91010',
+        alignItems: 'center',
+        marginVertical: "10%",
+        paddingVertical: "5%",
+        paddingHorizontal: "5%",
+        marginVertical: "5%",
+    },
+    createEvent: {
+        backgroundColor: '#841584',
+        alignItems: 'center',
+        marginVertical: "10%",
+        paddingVertical: "5%",
+        paddingHorizontal: "5%",
+        marginVertical: "5%",
+    },
+});
