@@ -49,8 +49,26 @@ const listCalendar = async (accessToken) => {
       console.log(err)
     }
   }
+  const createCalendar= async (accessToken, calendar)=>{
+    try {
+      let response = await fetch(url+'/calendars', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(calendar)
+      
+      })
+      return await response.json()
+    } catch(err) {
+      console.log(err)
+    }
+  }
   export{
       listCalendar,
       createEvent,
-      listEvents
+      listEvents,
+      createCalendar
   }

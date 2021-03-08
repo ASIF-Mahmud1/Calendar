@@ -12,7 +12,7 @@ import {
     
 } from 'react-native';
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from './google-auth'
-import { listCalendar, createEvent, listEvents } from './google-calendar.api'
+import { listCalendar, createEvent, listEvents,createCalendar } from './google-calendar.api'
 // import {event} from '../../sample/data/Event'
 import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
@@ -130,11 +130,9 @@ export default class extends React.Component {
             'colorId': this.state.color,
             "end": {
                 "dateTime": this.state.endate.toISOString(),
-                // "timeZone": "BST"
             },
             "start": {
                 "dateTime": this.state.sdate.toISOString(),
-                // "timeZone": "BST"
             },
         }
         let result = await createEvent(accessToken, calendarId, event)
@@ -170,11 +168,9 @@ export default class extends React.Component {
             'colorId': this.state.color,
             "end": {
                 "dateTime": new Date (endDate).toISOString()
-                // "timeZone": "BST"
             },
             "start": {
                 "dateTime":new Date(startDate).toISOString()
-                // "timeZone": "BST"
             },
         }
         let result = await createEvent(accessToken, calendarId, subevent)
@@ -182,7 +178,6 @@ export default class extends React.Component {
     }
     handleListEvents = async (calendarId) => {
         const { accessToken } = this.state
-        //  const calendarId= "asif01050105@gmail.com"
         calendarId = calendarId.replace("#", "%23")
         let result = await listEvents(accessToken, calendarId)
         this.setState({ allEvents: result.items ? result.items : [] })
@@ -194,6 +189,15 @@ export default class extends React.Component {
         let result = await predictEmailTag(response.access_token)
         alert(JSON.stringify(result))
     }
+    handleCreateCalendar = async () => {
+        const { accessToken } = this.state
+        const calendar = {
+            'summary': "Exam",        
+        }   
+        let result = await createCalendar(accessToken, calendar)       
+        console.log("Event response ", result)
+    }
+
     ShowForm = () => {
         this.setState({
             viewForm: !this.state.viewForm,
