@@ -123,8 +123,25 @@ export default class extends React.Component {
         console.log(result)
     }
     handleCreateEvent = async () => {
+        // const { accessToken } = this.state
+        // const calendarId = "asif01050105@gmail.com"
+        // let result = await createEvent(accessToken, calendarId, event)
+        // console.log("Event response ", result)
         const { accessToken } = this.state
-        const calendarId = "asif01050105@gmail.com"
+        const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
+        const event = {
+            'summary': this.state.title,
+            'colorId': this.state.color,
+            "end": {
+                "dateTime": this.state.endate.toISOString(),
+                // "timeZone": "BST"
+            },
+            "start": {
+                "dateTime": this.state.sdate.toISOString(),
+                // "timeZone": "BST"
+            },
+        }
+        // console.log(this.state.sdate.toISOString())
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
@@ -234,7 +251,9 @@ export default class extends React.Component {
 
                             <TouchableOpacity
                                 style={styles.create}
-                                onPress={() => { this.handleCreateEvent(), this.handleCreatePreEvent(); this.handleCreatePostEvent(); this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
+                                onPress={() => { this.handleCreateEvent(), 
+                                // this.handleCreatePreEvent(); this.handleCreatePostEvent();
+                                 this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
                                 <Text style={styles.createtext}>Create </Text>
                             </TouchableOpacity>
                         </View>
