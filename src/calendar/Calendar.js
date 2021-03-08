@@ -123,10 +123,6 @@ export default class extends React.Component {
         console.log(result)
     }
     handleCreateEvent = async () => {
-        // const { accessToken } = this.state
-        // const calendarId = "asif01050105@gmail.com"
-        // let result = await createEvent(accessToken, calendarId, event)
-        // console.log("Event response ", result)
         const { accessToken } = this.state
         const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
         const event = {
@@ -141,8 +137,47 @@ export default class extends React.Component {
                 // "timeZone": "BST"
             },
         }
-        // console.log(this.state.sdate.toISOString())
         let result = await createEvent(accessToken, calendarId, event)
+        console.log("Event response ", result)
+    }
+    handleCreatePreEvent= async()=>{
+        console.log("enter")
+        const { accessToken } = this.state
+        const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
+        const endDate=this.state.sdate.setMinutes(this.state.sdate.getMinutes())
+        const startdate =this.state.sdate.setMinutes(this.state.sdate.getMinutes()-10);
+        const subevent = {
+            'summary': "Pre Meeting",
+            'colorId': this.state.color,
+            "end": {
+                "dateTime": new Date(endDate).toISOString()
+            },
+            "start": {
+                "dateTime":new Date(startdate).toISOString(),
+            },
+        }
+        let result = await createEvent(accessToken, calendarId, subevent)
+        console.log("Event response ", result)
+    }
+    handleCreatePostEvent= async()=>{
+        console.log("post")
+        const { accessToken } = this.state
+        const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
+        const startDate =this.state.endate.setMinutes(this.state.endate.getMinutes());
+        const endDate =this.state.endate.setMinutes(this.state.endate.getMinutes()+10);
+        const subevent = {
+            'summary': "Post Meeting",
+            'colorId': this.state.color,
+            "end": {
+                "dateTime": new Date (endDate).toISOString()
+                // "timeZone": "BST"
+            },
+            "start": {
+                "dateTime":new Date(startDate).toISOString()
+                // "timeZone": "BST"
+            },
+        }
+        let result = await createEvent(accessToken, calendarId, subevent)
         console.log("Event response ", result)
     }
     handleListEvents = async (calendarId) => {
@@ -251,9 +286,7 @@ export default class extends React.Component {
 
                             <TouchableOpacity
                                 style={styles.create}
-                                onPress={() => { this.handleCreateEvent(), 
-                                // this.handleCreatePreEvent(); this.handleCreatePostEvent();
-                                 this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
+                                onPress={() => { this.handleCreateEvent(), this.handleCreatePreEvent(); this.handleCreatePostEvent();this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
                                 <Text style={styles.createtext}>Create </Text>
                             </TouchableOpacity>
                         </View>
