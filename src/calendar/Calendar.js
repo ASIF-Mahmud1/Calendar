@@ -1,24 +1,12 @@
 import React from 'react';
-import {
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    View,
-    Text,
-    StatusBar,
-    TouchableOpacity,
-    Button,
-    TextInput,
-
-} from 'react-native';
+import { StyleSheet, ScrollView, View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from './google-auth'
 import { listCalendar, createEvent, listEvents, createCalendar } from './google-calendar.api'
-// import {event} from '../../sample/data/Event'
 import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
 import { getIBMToken } from '.././utils/ibm-auth'
 import { predictEmailTag } from '.././utils/ibm-predict-api'
-import { Header, Label, Left } from "native-base";
+import { Header, Label } from "native-base";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
@@ -207,7 +195,7 @@ export default class extends React.Component {
                             placeholder='Add Event Title'
                             value={this.state.title}
                             onChangeText={(title) => {
-                            this.setState({ title: title });
+                                this.setState({ title: title });
                             }} />
                         <View
                             style={styles.Picker}>
@@ -373,13 +361,11 @@ export default class extends React.Component {
                                 <Text style={styles.text}>Get All Calendars</Text>
                             </TouchableOpacity>
                             <ListCalendars calendars={this.state.calendars} handleListEvents={this.handleListEvents} />
-                            <ListEvents allEvents={this.state.allEvents} />
+                            <ListEvents allEvents={this.state.allEvents}  />
 
                             <TouchableOpacity
                                 style={styles.createEvent}
-                                // onPress={() => { this.handleCreateEvent() }}
-                                onPress={() => { this.ShowForm() }}
-                            >
+                                onPress={() => { this.ShowForm() }}>
                                 <Text style={styles.text}>Create New Event</Text>
                             </TouchableOpacity>
                             {this.addForm()}
