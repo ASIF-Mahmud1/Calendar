@@ -7,7 +7,9 @@ import {
     Text,
     StatusBar,
     TouchableOpacity,
-    Button
+    Button,
+    TextInput,
+    
 } from 'react-native';
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from './google-auth'
 import { listCalendar, createEvent, listEvents } from './google-calendar.api'
@@ -16,9 +18,12 @@ import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
 import { getIBMToken } from '.././utils/ibm-auth'
 import { predictEmailTag } from '.././utils/ibm-predict-api'
-import { Header, Label, Picker, Left } from "native-base";
+import { Header, Label, Left } from "native-base";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import moment from 'moment'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import {Picker} from '@react-native-picker/picker';
 
 export default class extends React.Component {
     state = {
@@ -26,7 +31,67 @@ export default class extends React.Component {
         accessToken: '',
         calendars: [],
         allEvents: [],
+        viewForm: false,
+        title: '',
+        color: '',
+        user: '',
+        sdate: new Date(),
+        endate: new Date(),
+        mode: 'date',
+        show: false,
+        Show: false,
+
     }
+    updateUser = (user) => {
+        this.setState({ color: user });
+    };
+    setStartDate = (event, sdate) => {
+
+        sdate = sdate || this.state.sdate;
+
+        this.setState({
+            show: Platform.OS === 'ios' ? true : false,
+            sdate,
+        });
+    }
+    show = (mode) => {
+        this.setState({
+            show: true,
+            mode,
+        });
+    }
+    startdatepicker = () => {
+        // console.log("date")
+        this.show('date');
+    }
+    showStartTimepicker = () => {
+        this.show("time");
+    };
+
+    endatepicker = () => {
+        // console.log("date")
+        this.Show('date');
+    }
+    showEndTimepicker = () => {
+        this.Show("time");
+    };
+
+    Show = (mode) => {
+        this.setState({
+            Show: true,
+            mode,
+        });
+    }
+    setEndDate = (event, endate) => {
+        // console.log("end")
+        endate = endate || this.state.endate;
+
+        this.setState({
+            Show: Platform.OS === 'ios' ? true : false,
+            endate,
+        });
+    }
+
 
     componentDidMount = async () => {
         configureGoogleSignIn()
@@ -77,12 +142,111 @@ export default class extends React.Component {
         let result = await predictEmailTag(response.access_token)
         alert(JSON.stringify(result))
     }
+    ShowForm = () => {
+        this.setState({
+            viewForm: !this.state.viewForm,
+        });
+    };
+    addForm() {
+        if (this.state.viewForm) {
+            return (
+                <View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Add Event Title'
+                            value={this.state.title}
+                            onChangeText={(title) => {
+
+                                this.setState({ title: title });
+                            }}
+
+                        />
+                        <View
+                             style={styles.Picker}>
+                            <Picker
+                                placeholder="color"
+                                style={styles.PickerItem}
+                                selectedValue={this.state.color}
+                                onValueChange={this.updateUser}
+                                itemStyle={{ height: 120, transform: [{ scaleX: 1 }, { scaleY: 1 }] }}>
+
+                                <Picker.Item label="Color" value="" />
+                                <Picker.Item label="Lavender" value="1" color="#B2A4D4" />
+                                <Picker.Item label="Sage" value="2" color="#33b679" />
+                                <Picker.Item label="Grape" value="3" color="#8e24aa" />
+                                <Picker.Item label="Flamingo" value="4" color="#e67c73" />
+                                <Picker.Item label="Banana" value="5" color="#f6c026" />
+                                <Picker.Item label="Tangerine" value="6" color="#f5511d" />
+                                <Picker.Item label="Peacock" value="7" color="#039be5" />
+                                <Picker.Item label="Graphite" value="8" color="#616161" />
+                                <Picker.Item label="Blueberry" value="9" color="#00008B" />
+                                <Picker.Item label="Basil" value="10" color="#0b8043" />
+                                <Picker.Item label="Tomato" value="11" color="#FF6347" />
+                            </Picker>
+                        </View>
+                   
+                        <View style={{ flexDirection: 'row' }}>
+                            <Label style={{ color: 'black', fontSize: 18, marginLeft: 150, marginTop: 10 }}>Start</Label>
+                            <TouchableOpacity style={{ marginLeft: 50 }} onPress={() => { this.startdatepicker() }}>
+                                <Text style={styles.DateText}>{moment(this.state.sdate).format('YYYY-MM-DD')}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ marginRight: 150 }} onPress={() => { this.showStartTimepicker() }}>
+                                <Text style={styles.TimeText}>{moment(this.state.sdate).format('h:mm a')}</Text>
+                            </TouchableOpacity>
+
+
+                        </View>
+                        {this.state.show &&
+                            <DateTimePicker value={this.state.sdate}
+                                mode={this.state.mode}
+                                is24Hour={true}
+                                display="default"
+                                onChange={this.setStartDate} />
+                        }
+
+                        <View style={{ flexDirection: 'row' }}>
+                            <Label style={{ color: 'black', fontSize: 18, marginLeft: 160, marginTop: 10 }}>End</Label>
+
+                            <TouchableOpacity style={{ marginLeft: 60 }} onPress={() => { this.endatepicker() }}>
+                                <Text style={styles.DateText}>{moment(this.state.endate).format('YYYY-MM-DD')}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ marginRight: 160 }} onPress={() => { this.showEndTimepicker() }}>
+                                <Text style={styles.TimeText}>{moment(this.state.endate).format('h:mm a')}</Text>
+                            </TouchableOpacity>
+
+
+                        </View>
+
+
+
+                        {this.state.Show &&
+
+                            <DateTimePicker value={this.state.endate}
+                                mode={this.state.mode}
+                                is24Hour={true}
+                                display="default"
+                                onChange={this.setEndDate}
+                            />
+                        }
+
+                        <View style={{ margin: 30 }}>
+
+                            <TouchableOpacity
+                                style={styles.create}
+                                onPress={() => { this.handleCreateEvent(), this.handleCreatePreEvent(); this.handleCreatePostEvent(); this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
+                                <Text style={styles.createtext}>Create </Text>
+                            </TouchableOpacity>
+                        </View>
+
+                    </View>
+                </View>
+            );
+        }
+    }
     render() {
         return (
             <View>
-                {/* <Text>
-                    Calendar Component
-                </Text> */}
                 <Header>
                     {
                         this.state.loggedIn == false ?
@@ -148,9 +312,18 @@ export default class extends React.Component {
 
                             <TouchableOpacity
                                 style={styles.createEvent}
-                                onPress={() => { this.handleCreateEvent() }} >
+                                // onPress={() => { this.handleCreateEvent() }}
+                                onPress={() => { this.ShowForm() }}
+                            >
                                 <Text style={styles.text}>Create New Event</Text>
                             </TouchableOpacity>
+                            {this.addForm()}
+                            <TouchableOpacity
+                                style={styles.createEvent}
+                                onPress={() => { this.handleCreateCalendar() }}>
+                                <Text style={styles.text}>Create New calendar</Text>
+                            </TouchableOpacity>
+
                         </>
 
                     }
@@ -191,5 +364,40 @@ const styles = StyleSheet.create({
         paddingVertical: "5%",
         paddingHorizontal: "5%",
         marginVertical: "5%",
+    },
+    PickerItem: { color: '#0f0a3c', width: 150 },
+    Picker: { borderColor: 'grey', borderWidth: 1, height: 50, margin: 10, flexDirection: 'row', width: 200 },
+    textInput: {
+        backgroundColor: '#fff',
+        marginBottom: 5,
+        borderBottomWidth: 1,
+        width: 250,
+        fontSize: 20,
+        borderWidth: 1
+    },
+    DateText: {
+        marginTop: 10,
+        fontSize: 18,
+        fontWeight: '600',
+
+    },
+    TimeText: {
+        marginTop: 10,
+        marginLeft: 36,
+        fontSize: 18,
+        fontWeight: '600',
+
+    },
+    create: {
+        backgroundColor: '#009688',
+        marginBottom: 20,
+        alignItems: 'center',
+        margin: 30,
+        width: 200, height: 60, borderRadius: 5
+    },
+    createtext: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: "bold", marginTop: 10
     },
 });
