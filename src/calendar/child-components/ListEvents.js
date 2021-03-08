@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet,ScrollView,View,Text,TouchableOpacity} from 'react-native';
+import { StyleSheet, ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import moment from 'moment'
 import { List, ListItem, Left, Body } from 'native-base';
 
@@ -14,26 +14,18 @@ export default function ListEvents(props) {
       >
         <Text style={styles.title}>Events</Text>
       </TouchableOpacity>
-
-
       {
         props.allEvents.map((singleEvent, index) => {
-          // console.log(singleEvent.maxAttendees)
           let status
           if (singleEvent.attendees) {
             const data = singleEvent.attendees
-
             data.map((singledata, i) => {
-
               if (singledata.self) {
                 status = singledata.responseStatus
               }
             })
 
           }
-          console.log("status", status)
-          console.log("status", singleEvent)
-
           return (
             <List key={index}>
               <ListItem avatar>
@@ -63,21 +55,12 @@ export default function ListEvents(props) {
                 </Body>
               </ListItem>
             </List>
-
-
-
-
           )
-
-
-
         })
       }
     </ScrollView >
   )
 }
-//  {(new Date (singleEvent.created)).toDateString()} 
-
 const styles = StyleSheet.create({
   text: {
     fontSize: 16,
