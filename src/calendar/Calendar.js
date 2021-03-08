@@ -9,10 +9,10 @@ import {
     TouchableOpacity,
     Button,
     TextInput,
-    
+
 } from 'react-native';
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from './google-auth'
-import { listCalendar, createEvent, listEvents,createCalendar } from './google-calendar.api'
+import { listCalendar, createEvent, listEvents, createCalendar } from './google-calendar.api'
 // import {event} from '../../sample/data/Event'
 import ListEvents from './child-components/ListEvents'
 import ListCalendars from './child-components/ListCalendars'
@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 export default class extends React.Component {
     state = {
@@ -40,15 +40,15 @@ export default class extends React.Component {
         mode: 'date',
         show: false,
         Show: false,
+        viewCalendarFrom: false,
+        name: '',
 
     }
     updateUser = (user) => {
         this.setState({ color: user });
     };
     setStartDate = (event, sdate) => {
-
         sdate = sdate || this.state.sdate;
-
         this.setState({
             show: Platform.OS === 'ios' ? true : false,
             sdate,
@@ -61,7 +61,6 @@ export default class extends React.Component {
         });
     }
     startdatepicker = () => {
-        // console.log("date")
         this.show('date');
     }
     showStartTimepicker = () => {
@@ -69,7 +68,6 @@ export default class extends React.Component {
     };
 
     endatepicker = () => {
-        // console.log("date")
         this.Show('date');
     }
     showEndTimepicker = () => {
@@ -83,16 +81,12 @@ export default class extends React.Component {
         });
     }
     setEndDate = (event, endate) => {
-        // console.log("end")
         endate = endate || this.state.endate;
-
         this.setState({
             Show: Platform.OS === 'ios' ? true : false,
             endate,
         });
     }
-
-
     componentDidMount = async () => {
         configureGoogleSignIn()
         let response = await getCurrentUser();
@@ -138,12 +132,12 @@ export default class extends React.Component {
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
-    handleCreatePreEvent= async()=>{
+    handleCreatePreEvent = async () => {
         console.log("enter")
         const { accessToken } = this.state
         const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
-        const endDate=this.state.sdate.setMinutes(this.state.sdate.getMinutes())
-        const startdate =this.state.sdate.setMinutes(this.state.sdate.getMinutes()-10);
+        const endDate = this.state.sdate.setMinutes(this.state.sdate.getMinutes())
+        const startdate = this.state.sdate.setMinutes(this.state.sdate.getMinutes() - 10);
         const subevent = {
             'summary': "Pre Meeting",
             'colorId': this.state.color,
@@ -151,26 +145,26 @@ export default class extends React.Component {
                 "dateTime": new Date(endDate).toISOString()
             },
             "start": {
-                "dateTime":new Date(startdate).toISOString(),
+                "dateTime": new Date(startdate).toISOString(),
             },
         }
         let result = await createEvent(accessToken, calendarId, subevent)
         console.log("Event response ", result)
     }
-    handleCreatePostEvent= async()=>{
+    handleCreatePostEvent = async () => {
         console.log("post")
         const { accessToken } = this.state
         const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
-        const startDate =this.state.endate.setMinutes(this.state.endate.getMinutes());
-        const endDate =this.state.endate.setMinutes(this.state.endate.getMinutes()+10);
+        const startDate = this.state.endate.setMinutes(this.state.endate.getMinutes());
+        const endDate = this.state.endate.setMinutes(this.state.endate.getMinutes() + 10);
         const subevent = {
             'summary': "Post Meeting",
             'colorId': this.state.color,
             "end": {
-                "dateTime": new Date (endDate).toISOString()
+                "dateTime": new Date(endDate).toISOString()
             },
             "start": {
-                "dateTime":new Date(startDate).toISOString()
+                "dateTime": new Date(startDate).toISOString()
             },
         }
         let result = await createEvent(accessToken, calendarId, subevent)
@@ -192,9 +186,9 @@ export default class extends React.Component {
     handleCreateCalendar = async () => {
         const { accessToken } = this.state
         const calendar = {
-            'summary': "Exam",        
-        }   
-        let result = await createCalendar(accessToken, calendar)       
+            'summary': this.state.name,
+        }
+        let result = await createCalendar(accessToken, calendar)
         console.log("Event response ", result)
     }
 
@@ -213,13 +207,10 @@ export default class extends React.Component {
                             placeholder='Add Event Title'
                             value={this.state.title}
                             onChangeText={(title) => {
-
-                                this.setState({ title: title });
-                            }}
-
-                        />
+                            this.setState({ title: title });
+                            }} />
                         <View
-                             style={styles.Picker}>
+                            style={styles.Picker}>
                             <Picker
                                 placeholder="color"
                                 style={styles.PickerItem}
@@ -241,7 +232,6 @@ export default class extends React.Component {
                                 <Picker.Item label="Tomato" value="11" color="#FF6347" />
                             </Picker>
                         </View>
-                   
                         <View style={{ flexDirection: 'row' }}>
                             <Label style={{ color: 'black', fontSize: 18, marginLeft: 150, marginTop: 10 }}>Start</Label>
                             <TouchableOpacity style={{ marginLeft: 50 }} onPress={() => { this.startdatepicker() }}>
@@ -250,8 +240,6 @@ export default class extends React.Component {
                             <TouchableOpacity style={{ marginRight: 150 }} onPress={() => { this.showStartTimepicker() }}>
                                 <Text style={styles.TimeText}>{moment(this.state.sdate).format('h:mm a')}</Text>
                             </TouchableOpacity>
-
-
                         </View>
                         {this.state.show &&
                             <DateTimePicker value={this.state.sdate}
@@ -260,7 +248,6 @@ export default class extends React.Component {
                                 display="default"
                                 onChange={this.setStartDate} />
                         }
-
                         <View style={{ flexDirection: 'row' }}>
                             <Label style={{ color: 'black', fontSize: 18, marginLeft: 160, marginTop: 10 }}>End</Label>
 
@@ -270,14 +257,8 @@ export default class extends React.Component {
                             <TouchableOpacity style={{ marginRight: 160 }} onPress={() => { this.showEndTimepicker() }}>
                                 <Text style={styles.TimeText}>{moment(this.state.endate).format('h:mm a')}</Text>
                             </TouchableOpacity>
-
-
                         </View>
-
-
-
                         {this.state.Show &&
-
                             <DateTimePicker value={this.state.endate}
                                 mode={this.state.mode}
                                 is24Hour={true}
@@ -285,19 +266,47 @@ export default class extends React.Component {
                                 onChange={this.setEndDate}
                             />
                         }
-
                         <View style={{ margin: 30 }}>
-
                             <TouchableOpacity
                                 style={styles.create}
-                                onPress={() => { this.handleCreateEvent(), this.handleCreatePreEvent(); this.handleCreatePostEvent();this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
+                                onPress={() => { this.handleCreateEvent(), this.handleCreatePreEvent(); this.handleCreatePostEvent(); this.setState({ title: '', color: '', sdate: new Date(), endate: new Date() }) }} >
                                 <Text style={styles.createtext}>Create </Text>
                             </TouchableOpacity>
                         </View>
-
                     </View>
                 </View>
             );
+        }
+    }
+    ShowCalendarForm = () => {
+        this.setState({
+            viewCalendarFrom: !this.state.viewCalendarFrom,
+        });
+    };
+    calendarForm() {
+        if (this.state.viewCalendarFrom) {
+            return (
+                <View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Add Event Title'
+                            value={this.state.name}
+                            onChangeText={(name) => {
+                                this.setState({ name: name });
+                            }}
+                        />
+                        <View style={{ margin: 5 }}>
+                            <TouchableOpacity
+                                style={styles.create}
+                                onPress={() => { this.handleCreateCalendar(), this.setState({ name: '' }) }}>
+                                <Text style={styles.createtext}>Create </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                </View>
+            )
         }
     }
     render() {
@@ -376,9 +385,11 @@ export default class extends React.Component {
                             {this.addForm()}
                             <TouchableOpacity
                                 style={styles.createEvent}
-                                onPress={() => { this.handleCreateCalendar() }}>
+                                onPress={() => { this.ShowCalendarForm() }}
+                            >
                                 <Text style={styles.text}>Create New calendar</Text>
                             </TouchableOpacity>
+                            {this.calendarForm()}
 
                         </>
 
