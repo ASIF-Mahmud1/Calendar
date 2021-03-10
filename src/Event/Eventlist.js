@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
 import { event } from '../../sample/data/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt,faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 
@@ -38,7 +38,6 @@ export default class extends React.Component {
         }
     }
     handleCreateEvent = async (singleEvent) => {
-        // console.log("singleEvent",singleEvent)
         const { accessToken } = this.state
         const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"//add you calendarId
         const event = {
@@ -47,11 +46,14 @@ export default class extends React.Component {
             "start": singleEvent.startTime,
             'description': singleEvent.summary
         }
-        // console.log("event", event)
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
-
+    removelist = (singleEvent, index) => { //remove  event from list
+        console.log("removelist", singleEvent)
+        event.splice(index, 1)
+         this.setState({ event })
+    }
     render() {
         return (
             <Container>
@@ -97,9 +99,9 @@ export default class extends React.Component {
 
                             </View>
                     }
-                    
 
-                    {  this.state.loggedIn &&
+
+                    {this.state.loggedIn &&
                         event.map((singleEvent, index) => {
 
                             return (
@@ -138,7 +140,9 @@ export default class extends React.Component {
 
                                         <Right>
                                             <Button transparent style={{ width: 50, marginBottom: 140 }}
-                                                onPress={() => { this.handleCreateEvent(singleEvent) }} >
+                                                onPress={() => {
+                                                    this.handleCreateEvent(singleEvent), this.removelist(singleEvent, index)
+                                                }} >
 
 
                                                 <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
