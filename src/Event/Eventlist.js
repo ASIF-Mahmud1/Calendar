@@ -32,29 +32,22 @@ export default class extends React.Component {
     }
 
     handleSignIn = async () => {
-        console.log("enter")
         let response = await signIn()
         if (response.success) {
             this.setState({ loggedIn: true, accessToken: response.success.accessToken })
         }
     }
     handleCreateEvent = async (singleEvent) => {
-        console.log(singleEvent)
+        // console.log("singleEvent",singleEvent)
         const { accessToken } = this.state
         const calendarId = "9jafcfgfbo0vj1p38sr0utpd5g@group.calendar.google.com"
         const event = {
             'summary': singleEvent.title,
-            "end": {
-                "dateTime": "2021-02-04T09:00:00.000Z",
-                "timeZone": "BST" // 'America/Los_Angeles'
-            },
-            "start": {
-                "dateTime": "2021-02-04T07:00:00.000Z",
-                "timeZone": "BST" // 'America/Los_Angeles'
-            },
+            "end": singleEvent.endTime,
+            "start": singleEvent.startTime,
             'description': singleEvent.summary
         }
-        console.log("event", event)
+        // console.log("event", event)
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
@@ -161,14 +154,6 @@ export default class extends React.Component {
                     }
                 </Content>
             </Container>
-            // <View
-            //   style={{
-            //     flex: 1,
-            //     justifyContent: "center",
-            //     alignItems: "center"
-            //   }}>
-            //   <Text>Hello world</Text>
-            // </View>
         )
     }
 
