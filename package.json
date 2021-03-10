@@ -20,6 +20,7 @@
     "native-base": "^2.15.2",
     "react": "16.13.1",
     "react-native": "0.63.4",
+    "react-native-elements": "^3.3.0",
     "react-native-picker-select": "^8.0.4",
     "react-native-svg": "^12.1.0"
   },

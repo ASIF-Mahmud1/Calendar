@@ -7,4 +7,4 @@ import App from './App';
 import {name as appName} from './app.json';
 import Calendar from './src/calendar/Calendar';
 import Eventlist from './src/Event/Eventlist';
-AppRegistry.registerComponent(appName, () => Calendar);
+AppRegistry.registerComponent(appName, () => Eventlist);
