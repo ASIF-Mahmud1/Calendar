@@ -25,8 +25,8 @@ export default class extends React.Component {
 
                                                 <Text style={{ color: "black" }}>{singleEvent.summary}</Text>
                                                 <View style={{ flexDirection: 'row',marginTop:10 }}>
-                                                    <Button   success style={{  width: 60,marginRight:10 }}><Text style={{ color:'white', margin: 10 }}>Brave</Text></Button>
-                                                    <Button  success  style={{ width: 60 }}><Text style={{ color :'white',margin: 10 }}>kind</Text></Button>
+                                                    <Button   success style={{  width: 90,marginRight:20 }}><Text style={{ color:'white', margin: 24 }}>Brave</Text></Button>
+                                                    <Button  success  style={{ width: 90 }}><Text style={{ color :'white',margin: 10 }}>Ambitious</Text></Button>
 
                                                 </View>
                                                 <View style={{ flexDirection: 'row',marginTop:10 }}>
