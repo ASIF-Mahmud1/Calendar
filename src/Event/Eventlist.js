@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
-
+import moment from 'moment'
 export default class extends React.Component {
     state = {
         loggedIn: false,
@@ -52,7 +52,7 @@ export default class extends React.Component {
     removelist = (singleEvent, index) => { //remove  event from list
         console.log("removelist", singleEvent)
         event.splice(index, 1)
-         this.setState({ event })
+        this.setState({ event })
     }
     render() {
         return (
@@ -111,6 +111,11 @@ export default class extends React.Component {
                                         <Left>
                                             <View style={{ flexDirection: "column" }}>
                                                 <Label style={{ color: "red" }}>{singleEvent.title}</Label>
+                                                <Text style={{ color: "red" }}>
+                                                    {moment(singleEvent.startTime.dateTime).format("Do MMM ")}
+                                                    {moment(singleEvent.startTime.dateTime).format('h:mm a')}-
+                                                    {moment(singleEvent.endTime.dateTime).format('h:mm a')}
+                                                </Text>
 
                                                 <Text style={{ color: "black" }}>{singleEvent.summary}</Text>
                                                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
