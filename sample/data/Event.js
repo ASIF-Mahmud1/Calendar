@@ -27,12 +27,12 @@
 //   };
 
 
-var event = [
+const  event = [
   {
     eventId: 1,
     title: "Mountain Hiking",
     summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
-    tag: ["adventurous"],
+    tag: ["adventurous","fiction"],
     endTime: {
       "dateTime": "2021-03-04T14:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'
@@ -60,7 +60,7 @@ var event = [
     eventId: 3,
     title: "Research paper on AI",
     summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi",
-    tag: ["science"],
+    tag: ["science","adventurous"],
     endTime: {
       "dateTime": "2021-04-04T14:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'

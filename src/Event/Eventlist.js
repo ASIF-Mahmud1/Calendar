@@ -7,18 +7,37 @@ import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt } f
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
+import {getTagFrequencyTable} from '../RuleEngine/api-rule-engine'
 export default class extends React.Component {
     state = {
         loggedIn: false,
         accessToken: '',
-
+        allEvents:[],
+        featuredEvents:[] ,
+        userProfile: {
+            userId: 1,
+            eventsAddedToCalendar: [  
+              { 
+                eventId: 1,
+                opinion:[ 'brave' ],
+                liked: true
+              },
+              {
+                eventId:3,
+                opinion:["brave", "ambitious"],
+                liked: true
+              }
+            ]
+          }
 
     }
     componentDidMount = async () => {
         configureGoogleSignIn()
         let response = await getCurrentUser();
         if (response.success) {
-            this.setState({ accessToken: response.success.accessToken, loggedIn: true })
+           let table= getTagFrequencyTable(this.state.userProfile)
+           alert(JSON.stringify(table))
+            this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: event})
         }
         else {
             this.setState({ loggedIn: false })
@@ -102,7 +121,7 @@ export default class extends React.Component {
 
 
                     {this.state.loggedIn &&
-                        event.map((singleEvent, index) => {
+                        this.state.allEvents.map((singleEvent, index) => {
 
                             return (
 
