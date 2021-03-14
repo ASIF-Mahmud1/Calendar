@@ -86,7 +86,11 @@ const eventList= event
       }
     }
   }
-  return tagProbabilityTable 
+  const sortTag=  Object.entries(tagProbabilityTable)
+  .sort(([,a],[,b]) => b-a)
+  .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+
+  return sortTag  
  }
  
 const getTagFrequencyTable=(userProfile)=>{
