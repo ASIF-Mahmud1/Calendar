@@ -49,10 +49,15 @@ export default class extends React.Component {
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
-    removelist = (singleEvent, index) => { //remove  event from list
-        console.log("removelist", singleEvent)
-        event.splice(index, 1)
-        this.setState({ event })
+    removelist = (index, singleEvent) => { //remove  event from list
+        event.map((e, i) => {
+            if (index == i) {
+                console.log(singleEvent.iconshow)
+                singleEvent.iconshow = false
+                this.setState({ singleEvent })
+                console.log(singleEvent.iconshow)
+            }
+        })
     }
     render() {
         return (
@@ -125,14 +130,12 @@ export default class extends React.Component {
                                                 </View>
                                                 <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                                     <Button transparent style={{ marginLeft: 20 }}>
-                                                        {/* <Text style={{color:"white",margin:10}}>Like</Text> */}
                                                         <FontAwesomeIcon icon={faThumbsUp} style={{ color: '#00008b', }} size={26} />
 
                                                     </Button>
                                                     <Button transparent style={{ marginLeft: 40 }}>
                                                         <FontAwesomeIcon icon={faThumbsDown} style={{ color: '#00008b', marginTop: 10 }} size={26} />
 
-                                                        {/* <Text style={{color:"white",margin:7}}>DisLike</Text> */}
                                                     </Button>
 
                                                 </View>
@@ -146,14 +149,23 @@ export default class extends React.Component {
                                         <Right>
                                             <Button transparent style={{ width: 50, marginBottom: 140 }}
                                                 onPress={() => {
-                                                    this.handleCreateEvent(singleEvent), this.removelist(singleEvent, index)
+                                                    // this.handleCreateEvent(singleEvent), 
+                                                    this.removelist(index, singleEvent)
+
+
                                                 }} >
+                                                {singleEvent.iconshow == true &&
+                                                    <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
+                                                }
 
 
-                                                <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
-
-                                                {/* <Text style={{margin:10,color:"white"}}>Add</Text> */}
                                             </Button>
+                                            {singleEvent.iconshow == false &&
+                                                <View>
+                                                    <Text style={{ margin: 10, color: "red" }}>Add</Text>
+
+                                                </View>
+                                            }
                                         </Right>
 
                                     </ListItem>

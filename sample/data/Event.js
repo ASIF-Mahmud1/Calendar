@@ -41,6 +41,7 @@ var event = [
       "dateTime": "2021-03-04T12:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'
     },
+    iconshow:true
   },
   {
     eventId: 2,
@@ -55,6 +56,8 @@ var event = [
       "dateTime": "2021-03-12T16:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'
     },
+    iconshow:true
+
   },
   {
     eventId: 3,
@@ -69,6 +72,8 @@ var event = [
       "dateTime": "2021-04-04T12:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'
     },
+    iconshow:true
+
   },
   {
     eventId: 4,
@@ -83,6 +88,8 @@ var event = [
       "dateTime": "2021-03-05T12:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'
     },
+    iconshow:true
+
   }
 ]
 export {
