@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
 import { event } from '../../sample/data/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
@@ -49,13 +49,13 @@ export default class extends React.Component {
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
-    removelist = (index, singleEvent) => { //remove  event from list
+    removelist = (index, singleEvent) => { //change  calendar icon
         event.map((e, i) => {
             if (index == i) {
-                console.log(singleEvent.iconshow)
+                // console.log(singleEvent.iconshow)
                 singleEvent.iconshow = false
                 this.setState({ singleEvent })
-                console.log(singleEvent.iconshow)
+                // console.log(singleEvent.iconshow)
             }
         })
     }
@@ -112,69 +112,120 @@ export default class extends React.Component {
                             return (
 
                                 <List key={index}>
-                                    <ListItem selected>
+                                    <ListItem avatar >
                                         <Left>
-                                            <View style={{ flexDirection: "column" }}>
-                                                <Label style={{ color: "red" }}>{singleEvent.title}</Label>
-                                                <Text style={{ color: "red" }}>
-                                                    {moment(singleEvent.startTime.dateTime).format("Do MMM ")}
-                                                    {moment(singleEvent.startTime.dateTime).format('h:mm a')}-
-                                                    {moment(singleEvent.endTime.dateTime).format('h:mm a')}
-                                                </Text>
+                                            <View style={{width:"90%"}}> 
 
-                                                <Text style={{ color: "black" }}>{singleEvent.summary}</Text>
-                                                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                                    <Button success style={{ width: 90, marginRight: 20 }}><Text style={{ color: 'white', margin: 24 }}>Brave</Text></Button>
-                                                    <Button success style={{ width: 90 }}><Text style={{ color: 'white', margin: 10 }}>Ambitious</Text></Button>
+                                                <View style={{ flexDirection: "row" }}>
+
+                                                    <Image style={styles.image} source={singleEvent.image} />
+                                                    {/* <Left> */}
+                                                        <View style={{ flexDirection: 'column', marginLeft: 10,marginTop:20,width:"60%" }}>
+                                                            <Label style={{ color: "red", }}>{singleEvent.title}</Label>
+                                                            <Text style={{ color: "red" }}>
+                                                                {moment(singleEvent.startTime.dateTime).format("Do MMM ")}
+                                                                {moment(singleEvent.startTime.dateTime).format('h:mm a')}-
+                                                                {moment(singleEvent.endTime.dateTime).format('h:mm a')}
+                                                            </Text>
+                                                        </View>
+
+                                                    {/* </Left> */}
+                                                    {/* <Right>
+                                                        {singleEvent.iconshow == true &&
+                                                            <Button transparent style={{ width: 50 }}
+                                                                onPress={() => {
+                                                                    this.handleCreateEvent(singleEvent),
+                                                                        this.removelist(index, singleEvent)
+                                                                }} >
+                                                                <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
+
+
+                                                            </Button>}
+                                                        {singleEvent.iconshow == false &&
+                                                            <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#00008b', marginRight: 25 }} size={24} />
+
+                                                        }
+                                                    </Right> */}
 
                                                 </View>
-                                                <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                                    <Button transparent style={{ marginLeft: 20 }}>
-                                                        <FontAwesomeIcon icon={faThumbsUp} style={{ color: '#00008b', }} size={26} />
 
-                                                    </Button>
-                                                    <Button transparent style={{ marginLeft: 40 }}>
-                                                        <FontAwesomeIcon icon={faThumbsDown} style={{ color: '#00008b', marginTop: 10 }} size={26} />
 
-                                                    </Button>
+                                                <View style={{ flexDirection: "column" }}>
+
+
+
+                                                    <Text style={{ color: "black",marginTop:10 }}>{singleEvent.summary}</Text>
+                                                    <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                                        <Button success style={{ width: "30%", marginRight: 20 }}><Text style={{ color: 'white', margin: 24 }}>Brave</Text></Button>
+                                                        <Button success style={{ width: "32%" }}><Text style={{ color: 'white', margin: 10 }}>Ambitious</Text></Button>
+
+                                                    </View>
+                                                    <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                                                        <Button transparent style={{ marginLeft: 30 }}>
+                                                            <FontAwesomeIcon icon={faThumbsUp} style={{ color: '#00008b', }} size={26} />
+
+                                                        </Button>
+                                                        <Button transparent style={{ marginLeft: 80 }}>
+                                                            <FontAwesomeIcon icon={faThumbsDown} style={{ color: '#00008b', marginTop: 10 }} size={26} />
+
+                                                        </Button>
+
+                                                    </View>
+
 
                                                 </View>
-
-
                                             </View>
-
-
                                         </Left>
+
 
                                         <Right>
                                             {singleEvent.iconshow == true &&
                                                 <Button transparent style={{ width: 50, marginBottom: 140 }}
-                                                onPress={() => {
-                                                    this.handleCreateEvent(singleEvent),
-                                                        this.removelist(index, singleEvent)
+                                                    onPress={() => {
+                                                        this.handleCreateEvent(singleEvent),
+                                                            this.removelist(index, singleEvent)
 
 
-                                                }} >
-                                                {/* {singleEvent.iconshow == true && */}
+                                                    }} >
                                                     <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
-                                                {/* } */}
 
 
-                                            </Button>}
+                                                </Button>}
                                             {singleEvent.iconshow == false &&
-                                                    <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#00008b',marginBottom: 140,marginRight:25 }} size={24} />
+                                                <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#00008b', marginBottom: 140, marginRight: 25 }} size={24} />
 
                                             }
                                         </Right>
 
                                     </ListItem>
+                                    <View style={styles.divider} />
+
                                 </List>
+
                             )
                         })
                     }
+
                 </Content>
             </Container>
         )
     }
 
+
 }
+const styles = StyleSheet.create({
+    image: {
+        resizeMode: "cover",
+        height: 100,
+        width: 100
+    },
+    divider: {
+        borderBottomColor: '#808080',
+        borderBottomWidth: 1,
+        width: "95%",
+        alignSelf: "center",
+        opacity: 0.6
+
+    },
+
+});
