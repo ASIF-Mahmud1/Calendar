@@ -11,6 +11,7 @@ export default class extends React.Component {
     state = {
         loggedIn: false,
         accessToken: '',
+        pressStatus: false 
 
 
     }
@@ -59,6 +60,12 @@ export default class extends React.Component {
             }
         })
     }
+    _onHideUnderlay=()=> {
+        this.setState({ pressStatus: false });
+        }
+        _onShowUnderlay=()=> {
+        this.setState({ pressStatus: true });
+        }
     render() {
         return (
             <Container>
@@ -112,41 +119,25 @@ export default class extends React.Component {
                             return (
 
                                 <List key={index}>
-                                    <ListItem avatar >
+                                    <ListItem selected >
                                         <Left>
-                                            <View style={{width:"90%"}}> 
+                                            <View > 
 
                                                 <View style={{ flexDirection: "row" }}>
 
                                                     <Image style={styles.image} source={singleEvent.image} />
                                                     {/* <Left> */}
-                                                        <View style={{ flexDirection: 'column', marginLeft: 10,marginTop:20,width:"60%" }}>
-                                                            <Label style={{ color: "red", }}>{singleEvent.title}</Label>
-                                                            <Text style={{ color: "red" }}>
-                                                                {moment(singleEvent.startTime.dateTime).format("Do MMM ")}
-                                                                {moment(singleEvent.startTime.dateTime).format('h:mm a')}-
-                                                                {moment(singleEvent.endTime.dateTime).format('h:mm a')}
+                                                        <View style={{ flexDirection: 'column', marginLeft: 10,marginTop:16 }}>
+                                                            <Label style={{ color: "red",fontWeight:'bold',fontSize:20,width:220 }}>{singleEvent.title}</Label>
+                                                            <Text style={{ color: "red",fontSize:18 }}>
+                                                                {moment(singleEvent.startTime.dateTime).format("Do MMM")},
+                                                                
+                                                                {moment(singleEvent.startTime.dateTime).format(' h:mma ')}to
+                                                                {moment(singleEvent.endTime.dateTime).format(' h:mma')}
                                                             </Text>
                                                         </View>
 
-                                                    {/* </Left> */}
-                                                    {/* <Right>
-                                                        {singleEvent.iconshow == true &&
-                                                            <Button transparent style={{ width: 50 }}
-                                                                onPress={() => {
-                                                                    this.handleCreateEvent(singleEvent),
-                                                                        this.removelist(index, singleEvent)
-                                                                }} >
-                                                                <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
-
-
-                                                            </Button>}
-                                                        {singleEvent.iconshow == false &&
-                                                            <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#00008b', marginRight: 25 }} size={24} />
-
-                                                        }
-                                                    </Right> */}
-
+                                                    
                                                 </View>
 
 
@@ -154,10 +145,10 @@ export default class extends React.Component {
 
 
 
-                                                    <Text style={{ color: "black",marginTop:10 }}>{singleEvent.summary}</Text>
+                                                    <Text style={{ color: "black",marginTop:10,fontSize:16,width:350 }}>{singleEvent.summary}</Text>
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                                        <Button success style={{ width: "30%", marginRight: 20 }}><Text style={{ color: 'white', margin: 24 }}>Brave</Text></Button>
-                                                        <Button success style={{ width: "32%" }}><Text style={{ color: 'white', margin: 10 }}>Ambitious</Text></Button>
+                                                        <Button  style={styles.braveButton}><Text style={{ color: 'white', margin: 24,fontSize:18 }}>Brave</Text></Button>
+                                                        <Button  style={{ width: "32%",backgroundColor:"#2f96e3" }}><Text style={{ color: 'white', margin: 14,fontSize:18 }}>Ambitious</Text></Button>
 
                                                     </View>
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -180,19 +171,19 @@ export default class extends React.Component {
 
                                         <Right>
                                             {singleEvent.iconshow == true &&
-                                                <Button transparent style={{ width: 50, marginBottom: 140 }}
+                                                <Button transparent style={{ width: 50, marginBottom: 300}}
                                                     onPress={() => {
                                                         this.handleCreateEvent(singleEvent),
                                                             this.removelist(index, singleEvent)
 
 
                                                     }} >
-                                                    <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
+                                                    <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b',marginLeft:20 }} size={38} />
 
 
                                                 </Button>}
                                             {singleEvent.iconshow == false &&
-                                                <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#00008b', marginBottom: 140, marginRight: 25 }} size={24} />
+                                                <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#3ddc84', marginBottom: 300, marginLeft: 25 }} size={40} />
 
                                             }
                                         </Right>
@@ -216,9 +207,12 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
     image: {
         resizeMode: "cover",
-        height: 100,
-        width: 100
+        height: 120,
+        width: 100,
+        marginTop:10
     },
+    braveButton:{ width: "30%",backgroundColor:"#dd9d2b", marginRight: 20 },
+    PressbraveButton:{ width: "30%",backgroundColor:"#dd9d2b",borderColor:'grey', marginRight: 20 },
     divider: {
         borderBottomColor: '#808080',
         borderBottomWidth: 1,
