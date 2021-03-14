@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
-import { event } from '../../sample/data/Event'
+import { event,newEvents } from '../../sample/data/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
-import {getTagFrequencyTable} from '../RuleEngine/api-rule-engine'
+import {getTagFrequencyTable, recommendEvents} from '../RuleEngine/api-rule-engine'
 import EventCategory from './EventCategory'
 export default class extends React.Component {
     state = {
@@ -88,8 +88,11 @@ export default class extends React.Component {
        userProfile['eventsAddedToCalendar'].push(eventInfo)
        this.setState({userProfile:userProfile},()=>{
        console.log( this.state.userProfile['eventsAddedToCalendar']  )
-       let table= getTagFrequencyTable(this.state.userProfile)
-       console.log(table)
+       let tagWithProbability= getTagFrequencyTable(this.state.userProfile)
+       const featuredEvents= recommendEvents(newEvents, tagWithProbability)
+       this.setState({featuredEvents:featuredEvents})
+       console.log("featuredEvent", featuredEvents)
+       alert(JSON.stringify(tagWithProbability))
     })
 
     }
