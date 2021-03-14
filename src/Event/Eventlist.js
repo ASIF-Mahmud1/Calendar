@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
 import { event } from '../../sample/data/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
@@ -147,24 +147,23 @@ export default class extends React.Component {
                                         </Left>
 
                                         <Right>
-                                            <Button transparent style={{ width: 50, marginBottom: 140 }}
+                                            {singleEvent.iconshow == true &&
+                                                <Button transparent style={{ width: 50, marginBottom: 140 }}
                                                 onPress={() => {
-                                                    // this.handleCreateEvent(singleEvent), 
-                                                    this.removelist(index, singleEvent)
+                                                    this.handleCreateEvent(singleEvent),
+                                                        this.removelist(index, singleEvent)
 
 
                                                 }} >
-                                                {singleEvent.iconshow == true &&
+                                                {/* {singleEvent.iconshow == true && */}
                                                     <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b' }} size={24} />
-                                                }
+                                                {/* } */}
 
 
-                                            </Button>
+                                            </Button>}
                                             {singleEvent.iconshow == false &&
-                                                <View>
-                                                    <Text style={{ margin: 10, color: "red" }}>Add</Text>
+                                                    <FontAwesomeIcon icon={faCalendarCheck} style={{ color: '#00008b',marginBottom: 140,marginRight:25 }} size={24} />
 
-                                                </View>
                                             }
                                         </Right>
 
