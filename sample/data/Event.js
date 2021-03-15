@@ -226,7 +226,7 @@ const  newEvents = [
     eventId: 13,
     title: "Will AI take over the World ?",
     summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi",
-    tag: ["science","adventurous"],
+    tag: ["science"],
     endTime: {
       "dateTime": "2021-04-04T14:00:00.000Z",
       "timeZone": "BST" // 'America/Los_Angeles'

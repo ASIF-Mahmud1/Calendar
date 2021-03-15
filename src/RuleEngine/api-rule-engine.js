@@ -104,6 +104,66 @@ const getTagFrequencyTable=(userProfile)=>{
     return tagWithProbability
 }
 
+const findEventByTag=(eventList, tag)=>{ // ask Miss
+  const result = eventList.filter((event) => {
+    const response= event["tag"].find((Tag)=>{
+      return Tag===tag
+    })
+
+    return response
+
+ })
+  return result
+}
+
+// const res= findEventByTag(newEvents, "science")
+// console.log(res)
+
+const removeDuplicateEvents=(featuredEvents)=>{
+  const removeDuplicate = featuredEvents.reduce((acc, current) => {
+    const x = acc.find(item => item.eventId === current.eventId);
+    if (!x) {
+      return acc.concat([current]);
+    } else {
+      return acc;
+    }
+  }, []);
+  return removeDuplicate
+}
+const recommendEvents = (newEvents, tagWithProbability)=>{
+  const numberOfFeaturedEvent=2
+  let featuredEvents =[]
+
+  for (const tag in tagWithProbability) 
+  {
+    const res= findEventByTag(newEvents, tag)
+    const proportion= Math.ceil(tagWithProbability[tag]* numberOfFeaturedEvent)
+    if(proportion<=res.length)
+    {
+       featuredEvents =[...featuredEvents, ...res]
+    } 
+    else 
+    {
+      const elements= res.slice(0, 2);
+      featuredEvents =[...featuredEvents, ...elements]
+    }
+
+  }
+  const removeDuplicate =removeDuplicateEvents(featuredEvents)
+  return removeDuplicate
+
+}
+
+//  const results= recommendEvents(newEvents,tagWithProbability)
+//  console.log("Recommended Events \n",results) 
+
+//  // Shuffle array
+// const shuffled = array.sort(() => 0.5 - Math.random());
+
+// // Get sub-array of first n elements after shuffled
+// let selected = shuffled.slice(0, n);
+
 export{
-    getTagFrequencyTable
+    getTagFrequencyTable,
+    recommendEvents
 }
