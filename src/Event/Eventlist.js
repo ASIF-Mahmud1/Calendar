@@ -13,7 +13,8 @@ export default class extends React.Component {
         accessToken: '',
         opinion:'',
         type: '',
-        indexValue:''
+        indexValue:'',
+        like:false
     }
     componentDidMount = async () => {
         configureGoogleSignIn()
