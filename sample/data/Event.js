@@ -187,7 +187,12 @@ dislike:false
     image: require("../image/image11.jpg"),
 
 
-  },
+  }
+
+]
+
+const  newEvents = [
+ 
   {
     eventId: 11,
     title: "Art 101: Acrylic Pour Painting",
@@ -256,7 +261,7 @@ dislike:false
     eventId: 15,
     title: "LAKE DISTRICT 5 PEAKS CHALLENGE",
     summary: "Prepare for an epic challenge through the rugged and dramatic landscape of the Lake District, as you tackle five of England’s most demanding peaks, including its highest – Scafell Pike",
-    tag: ["adventure"],
+    tag: ["adventurous"],
     endTime: {
       "dateTime": "2021-08-13T14:00:00.000Z",
       "timeZone": "BST"
@@ -267,13 +272,9 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image16.jpg")
-  }
-
-]
-
-const  newEvents = [
+  },
   {
-    eventId: 11,
+    eventId: 16,
     title: "Trail Running",
     summary: "Although trail running is similar to running on the roads, there are some differences to make note of before you hit the trailhead. To help you get started, we pulled together a list of our best trail running tips that will guide you. While they may seem like a lot, they’re not hard to do!",
     tag: ["adventurous"],
@@ -290,7 +291,7 @@ const  newEvents = [
 
   },
   {
-    eventId: 12,
+    eventId: 17,
     title: "Music Festival",
     summary:"The Royal Albert Hall is a concert hall on the northern edge of South Kensington, London. One of the United Kingdom's most treasured and distinctive buildings, it is held in trust for the nation and managed by a registered charity. " ,
     tag: ["art"],
@@ -307,7 +308,7 @@ const  newEvents = [
 
   },
   {
-    eventId: 13,
+    eventId: 18,
     title: "Will AI take over the World ?",
     summary: "While narrow AI can outperform humans in some tasks, there's little to suggest that more general AI that can emulate humans' ability to respond to many different tasks will be delivered and put humans at risk in the near future. Even without a singularity, AI will have a dramatic impact on human society.",
     tag: ["science"],
@@ -324,7 +325,7 @@ const  newEvents = [
 
   },
   {
-    eventId: 14,
+    eventId: 19,
     title: " Girls Inc. | Inspiring All Girls to be Strong, Smart, & Bold",
     summary: "Our comprehensive approach addresses all aspects of a girl’s life and helps her discover and develop her inherent strengths. Girls receive programming to grow up healthy, educated, and independent.",
     tag: ["empowerment"],
