@@ -28,12 +28,18 @@ export default function SingleEvent(props) {
                                             <Image style={styles.image} source={singleEvent.image} />
                                           
                                             <View style={styles.titleView}>
+                                                {
+                                                    props.featuredEvent &&
+                                                    <Text style={styles.featuredEvent}>Reccomended For You! </Text>
+                                                }
+                                                
                                                 <Label style={styles.title}>{singleEvent.title}</Label>
                                                 <Text style={styles.dateTime}>
                                                     {moment(singleEvent.startTime.dateTime).format("Do MMM")},
                                                     {moment(singleEvent.startTime.dateTime).format(' h:mma ')}to
                                                     {moment(singleEvent.endTime.dateTime).format(' h:mma')}
                                                 </Text>
+                                               
                                             </View>
 
 
@@ -167,6 +173,10 @@ const styles = StyleSheet.create({
         opacity: 0.6
 
     },
+    featuredEvent:{
+        color: "green",
+        fontWeight:"bold"
+    }
 
 });
 
