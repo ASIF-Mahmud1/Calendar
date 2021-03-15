@@ -83,18 +83,18 @@ export default class extends React.Component {
             }
         })
     }
-    // chooseIndex = (singleEvent, index) => {
+    chooseIndex = (singleEvent, index) => {
        
-    //     event.map((e, i) => {
-    //         if (index == i) {
-    //             singleEvent.status = true
-    //             this.setState({ singleEvent })
+        event.map((e, i) => {
+            if (index == i) {
+                singleEvent.status = true
+                this.setState({ singleEvent })
                
                
-    //         }
-    //     })
+            }
+        })
 
-    // }
+    }
 
     changeValue = (value) => {//like or dislike
         
@@ -173,112 +173,10 @@ export default class extends React.Component {
 
 
                     {this.state.loggedIn &&
-                        this.state.allEvents.map((singleEvent, index) => {
-
-                            return (
-
-                                <List key={index}>
-                                    <ListItem selected >
-                                        <Left>
-                                            <View >
-
-                                                <View style={styles.view}>
-
-                                                    <Image style={styles.image} source={singleEvent.image} />
-                                                  
-                                                    <View style={styles.titleView}>
-                                                        <Label style={styles.title}>{singleEvent.title}</Label>
-                                                        <Text style={styles.dateTime}>
-                                                            {moment(singleEvent.startTime.dateTime).format("Do MMM")},
-
-                                                                {moment(singleEvent.startTime.dateTime).format(' h:mma ')}to
-                                                                {moment(singleEvent.endTime.dateTime).format(' h:mma')}
-                                                        </Text>
-                                                    </View>
-
-
-                                                </View>
-
-
-                                                <View style={styles.description}>
-
-
-
-                                                    <Text style={styles.summary}>{singleEvent.summary}</Text>
-                                                    <View style={styles.opinion}>
-                                                        <Button
-                                                            style={ this.state.opinion == "brave" ? styles.PressbraveButton : styles.braveButton}
-
-
-                                                            onPress={() => {
-                                                                this.changeOpnioin("brave")
-                                                               
-                                                            }}
-                                                        >
-                                                            <Text style={styles.BraveText}>Brave</Text>
-                                                        </Button>
-                                                        <Button
-                                                            style={this.state.opinion == "ambitious" ? styles.PressAmbitiousButton : styles.AmbitiousButton}
-
-                                                            onPress={() => {
-                                                                this.changeOpnioin("ambitious")
-                                                            }}
-                                                        >
-                                                            <Text style={styles.AmbitiousText}>Ambitious</Text>
-                                                        </Button>
-
-                                                    </View>
-                                                    <View style={styles.status}>
-                                                        <Button transparent style={styles.likeButton}onPress={() => {
-                                                                this.changeValue("like")
-                                                                 this.chooseIndex(singleEvent,index,"like")
-                                                            }}>
-                                                            <FontAwesomeIcon icon={faThumbsUp} style={this.state.type == "like" ?styles.Presslike:styles.like} size={26} />
-
-                                                        </Button>
-                                                        <Button transparent style={styles.dislikeButton}onPress={() => {
-                                                                this.changeValue("dislike")
-                                                                //  this.chooseIndex(singleEvent,index)
-
-                                                            }}>
-                                                            <FontAwesomeIcon icon={faThumbsDown} style={ this.state.type == "dislike" ?styles.Pressdislike:styles.dislike} size={26} />
-
-                                                        </Button>
-
-                                                    </View>
-
-
-                                                </View>
-                                            </View>
-                                        </Left>
-
-
-                                        <Right>
-                                            {singleEvent.iconshow == true &&
-                                                <Button transparent style={styles.calendarButton}
-                                                    onPress={() => {
-                                                        this.handleCreateEvent(singleEvent),
-                                                            this.changeIcon(index, singleEvent)
-
-
-                                                    }} >
-                                                    <FontAwesomeIcon icon={faCalendarPlus} style={styles.Calendaricon} size={38} />
-
-
-                                                </Button>}
-                                                {singleEvent.iconshow == false &&
-                                                <FontAwesomeIcon icon={faCalendarCheck} style={styles.CalendarCheckIocn} size={40} />
-
-                                            }
-                                        </Right>
-
-                                    </ListItem>
-                                    <View style={styles.divider} />
-
-                                </List>
-
-                            )
-                        })
+                     <>
+                     <EventCategory  featuredEvent={true} allEvents={state.featuredEvents }  handleOpinion={ this.handleOpinion} handleCreateEvent={this.handleCreateEvent}  changeIcon={this.changeIcon}  chooseIndex ={this.chooseIndex} opinion={this.state.opinion} type ={this.state.type} />
+                     <EventCategory featuredEvent={false} allEvents={state.allEvents }  handleOpinion={ this.handleOpinion} handleCreateEvent={this.handleCreateEvent}  changeIcon={this.changeIcon} chooseIndex ={this.chooseIndex} />
+                     </> 
                     }
 
                 </Content>
