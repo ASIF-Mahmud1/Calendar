@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     logoutIcon:{ color: 'white', marginTop: 5, marginLeft: 10 },
     logoutText:{ fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5, fontSize: 20, marginRight: 10 },
     text:{ fontSize: 20, fontWeight: "bold" },
-
+   // listView CSS
     image: {
         resizeMode: "cover",
         height: 120,
