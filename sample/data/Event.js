@@ -14,7 +14,8 @@ var event = [
     },
     iconshow: true,
     image: require("../image/hiking.jpg"),
-   
+like:false,
+dislike:false   
   },
   {
     eventId: 2,
@@ -32,7 +33,8 @@ var event = [
     iconshow: true,
     image: require("../image/ArtExhibition.jpg"),
  
-   
+    like:false,
+    dislike:false
    
 
   },
@@ -51,7 +53,8 @@ var event = [
     },
     iconshow: true,
     image: require("../image/AI_Reasearch.jpg"),
-   
+    like:false,
+    dislike:false
 
 
   },
@@ -185,6 +188,87 @@ var event = [
 
 
   },
+  {
+    eventId: 11,
+    title: "Art 101: Acrylic Pour Painting",
+    summary: "A free, two-hour painting workshop on Zoom, hosted by the Appleton Museum of Art.",
+    tag: ["art"],
+    endTime: {
+      "dateTime": "2021-03-16T16:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-03-16T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image12.jpg")
+  },
+  {
+    eventId: 12,
+    title: "Kaushalya UK Women's Day 2021",
+    summary: "International Women's Day celebration with Kaushalya UK - full of fun, inspiration, courage and appreciations.",
+    tag: ["empowerment"],
+    endTime: {
+      "dateTime": "2021-03-15T18:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-03-15T15:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image13.jpg")
+  },
+  {
+    eventId: 13,
+    title: "Data Science Day 2021",
+    summary: "International Women's Day celebration with Kaushalya UK - full of fun, inspiration, courage and appreciations.",
+    tag: ["science"],
+    endTime: {
+      "dateTime": "2021-04-21T17:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-04-21T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image14.jpg")
+  },
+  {
+    eventId: 14,
+    title: "Hiking in the White Mountains",
+    summary: "Join the experts at Helly Hansen for a small group presentation on the White Mountains",
+    tag: ["adventure"],
+    endTime: {
+      "dateTime": "2021-03-21T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-03-21T13:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image15.jpg")
+  },
+  {
+    eventId: 15,
+    title: "LAKE DISTRICT 5 PEAKS CHALLENGE",
+    summary: "Prepare for an epic challenge through the rugged and dramatic landscape of the Lake District, as you tackle five of England’s most demanding peaks, including its highest – Scafell Pike",
+    tag: ["adventure"],
+    endTime: {
+      "dateTime": "2021-08-13T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-08-13T02:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image16.jpg")
+  }
+
 ]
 export {
   event
