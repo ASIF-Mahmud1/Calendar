@@ -50,7 +50,7 @@ export default class extends React.Component {
         let result = await createEvent(accessToken, calendarId, event)
         console.log("Event response ", result)
     }
-    removelist = (index, singleEvent) => { //change  calendar icon
+    changeIcon = (index, singleEvent) => { //change  calendar icon
         event.map((e, i) => {
             if (index == i) {
                 singleEvent.iconshow = false
@@ -58,18 +58,17 @@ export default class extends React.Component {
             }
         })
     }
-    chooseIndex = ( index) => {
+    // chooseIndex = (singleEvent, index) => {
        
-        event.map((e, i) => {
-            if (index == i) {
+    //     event.map((e, i) => {
+    //         if (index == i) {
                
-            //    this.state.indexValue=index
-                this.setState({index:indexValue })
                
-            }
-        })
+               
+    //         }
+    //     })
 
-    }
+    // }
     changeOpnioin = (value) => {// brave or ambitious
         
         this.setState({
@@ -77,10 +76,11 @@ export default class extends React.Component {
                 })
 
     }
-    changeValue = (value) => {//like or dislike
+    changeValue = (value,index) => {//like or dislike
         
         this.setState({
             type: value,
+            indexValue:index
                 })
 
     }
@@ -172,7 +172,8 @@ export default class extends React.Component {
 
 
                                                             onPress={() => {
-                                                                this.changeOpnioin("brave"),this.chooseIndex(index)
+                                                                this.changeOpnioin("brave")
+                                                                // ,this.chooseIndex(index)
                                                             }}
                                                         >
                                                             <Text style={{ color: 'white', margin: 24, fontSize: 18 }}>Brave</Text>
@@ -191,15 +192,18 @@ export default class extends React.Component {
                                                     </View>
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                                         <Button transparent style={{ marginLeft: 30 }}onPress={() => {
-                                                                this.changeValue("like")
+                                                                this.changeValue("like",index)
+                                                                // this.chooseIndex(singleEvent,index)
                                                             }}>
-                                                            <FontAwesomeIcon icon={faThumbsUp} style={this.state.type == "like" ?styles.Presslike:styles.like} size={26} />
+                                                            <FontAwesomeIcon icon={faThumbsUp} style={this.state.indexValue==index &&this.state.type == "like" ?styles.Presslike:styles.like} size={26} />
 
                                                         </Button>
                                                         <Button transparent style={{ marginLeft: 80 }}onPress={() => {
-                                                                this.changeValue("dislike")
+                                                                this.changeValue("dislike",index)
+                                                                // this.chooseIndex(singleEvent,index)
+
                                                             }}>
-                                                            <FontAwesomeIcon icon={faThumbsDown} style={this.state.type == "dislike" ?styles.Pressdislike:styles.dislike} size={26} />
+                                                            <FontAwesomeIcon icon={faThumbsDown} style={this.state.indexValue==index && this.state.type == "dislike" ?styles.Pressdislike:styles.dislike} size={26} />
 
                                                         </Button>
 
@@ -216,7 +220,7 @@ export default class extends React.Component {
                                                 <Button transparent style={{ width: 50, marginBottom: 300 }}
                                                     onPress={() => {
                                                         this.handleCreateEvent(singleEvent),
-                                                            this.removelist(index, singleEvent)
+                                                            this.changeIcon(index, singleEvent)
 
 
                                                     }} >

@@ -14,7 +14,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/hiking.jpg"),
-    status:false
   },
   {
     eventId: 2,
@@ -31,7 +30,7 @@ var event = [
     },
     iconshow: true,
     image: require("../image/ArtExhibition.jpg"),
-    status:false
+ 
    
 
   },
@@ -50,7 +49,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/AI_Reasearch.jpg"),
-    status:false
 
   },
   {
@@ -68,7 +66,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image4.jpg"),
-    status:false
 
 
 
@@ -88,8 +85,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image5.jpg"),
-    status:false
-
 
 
   },
@@ -108,8 +103,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image7.jpg"),
-    status:false
-
 
 
   },
@@ -128,8 +121,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image8.jpg"),
-    status:false
-
 
 
   },
@@ -148,8 +139,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image9.jpg"),
-    status:false
-
 
 
   },
@@ -168,8 +157,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image10.jpg"),
-    status:false
-   
 
 
 
@@ -190,8 +177,6 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image11.jpg"),
-    status:false
-   
 
 
   },
