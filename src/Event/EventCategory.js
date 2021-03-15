@@ -42,19 +42,25 @@ export default function SingleEvent(props) {
 
                                         <View style={styles.description}>
 
-
+                                      
 
                                             <Text style={styles.summary}>{singleEvent.summary}</Text>
                                             <View style={styles.opinion}>
                                                 <Button
-                                                    style={ props.opinion == "brave" ? styles.PressbraveButton : styles.braveButton}
-                                                    onPress={() => { props.handleOpinion(singleEvent,"brave") }}
+                                                    style={ singleEvent["userOpinion"] == "brave" ? styles.PressbraveButton : styles.braveButton}
+                                                    onPress={() => { 
+                                                     props.handleOpinion(singleEvent,"brave"); 
+                                                     props.changeValue(props.featuredEvent,"userOpinion","brave",index)
+                                                     }}
                                                 >
                                                     <Text style={styles.BraveText}>Brave</Text>
                                                 </Button>
                                                 <Button
-                                                    style={props.opinion == "ambitious" ? styles.PressAmbitiousButton : styles.AmbitiousButton}
-                                                    onPress={() => { props.handleOpinion(singleEvent,"ambitious") }}
+                                                    style={singleEvent["userOpinion"]  == "ambitious" ? styles.PressAmbitiousButton : styles.AmbitiousButton}
+                                                    onPress={() => { 
+                                                        props.handleOpinion(singleEvent,"ambitious")
+                                                        props.changeValue(props.featuredEvent,"userOpinion","ambitious",index)
+                                                     }}
                                                 >
                                                     <Text style={styles.AmbitiousText}>Ambitious</Text>
                                                 </Button>
@@ -62,18 +68,18 @@ export default function SingleEvent(props) {
                                             </View>
                                             <View style={styles.status}>
                                                 <Button transparent style={styles.likeButton}onPress={() => {
-                                                        props.changeValue("like")
+                                                        props.changeValue(props.featuredEvent,"liked","like",index)
                                                         // props.chooseIndex(singleEvent,index,"like")
                                                     }}>
-                                                    <FontAwesomeIcon icon={faThumbsUp} style={props.type == "like" ?styles.Presslike:styles.like} size={26} />
+                                                    <FontAwesomeIcon icon={faThumbsUp} style={singleEvent['liked'] == "like" ?styles.Presslike:styles.like} size={26} />
 
                                                 </Button>
                                                 <Button transparent style={styles.dislikeButton}onPress={() => {
-                                                        props.changeValue("dislike")
+                                                        props.changeValue(props.featuredEvent,"liked","dislike",index)
                                                         //  this.chooseIndex(singleEvent,index)
 
                                                     }}>
-                                                    <FontAwesomeIcon icon={faThumbsDown} style={ props.type == "dislike" ?styles.Pressdislike:styles.dislike} size={26} />
+                                                    <FontAwesomeIcon icon={faThumbsDown} style={ singleEvent['liked']== "dislike" ?styles.Pressdislike:styles.dislike} size={26} />
 
                                                 </Button>
 

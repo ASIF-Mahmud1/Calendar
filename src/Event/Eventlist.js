@@ -40,11 +40,16 @@ export default class extends React.Component {
         configureGoogleSignIn()
         let response = await getCurrentUser();
         if (response.success) {
-          
             let table= getTagFrequencyTable(this.state.userProfile)
             //alert(JSON.stringify(table))
             console.log(table)
-            this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: event})
+            this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: event},()=>{
+                const  allEvents= this.state.allEvents
+                allEvents.map((event)=>{
+                    event['liked']=null,
+                    event['userOpinion']= null
+                })
+            })
         }
         else {
             this.setState({ loggedIn: false })
@@ -96,12 +101,20 @@ export default class extends React.Component {
 
     }
 
-    changeValue = (value) => {//like or dislike
-        
-        this.setState({
-            type: value,
-            
-                })
+    changeValue = (featuredEvent,params, value,index) => {//like or dislike
+        let  events=[]
+        if(featuredEvent)
+        {
+            events=  this.state.featuredEvents
+            events[index][params]=value
+            this.setState({featuredEvents: events})  
+        }
+        else 
+        {
+            events=  this.state.allEvents
+            events[index][params]=value
+            this.setState({allEvents: events})  
+        }
 
     }
 
@@ -122,7 +135,7 @@ export default class extends React.Component {
        const featuredEvents= recommendEvents(newEvents, tagWithProbability)
        this.setState({featuredEvents:featuredEvents})
        console.log("featuredEvent", featuredEvents)
-       alert(JSON.stringify(tagWithProbability))
+      // alert(JSON.stringify(tagWithProbability))
     })
 
     }
