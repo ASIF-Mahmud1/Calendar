@@ -11,9 +11,8 @@ export default class extends React.Component {
     state = {
         loggedIn: false,
         accessToken: '',
-        pressStatus: false 
-
-
+        pressStatus: false,
+        type: '',
     }
     componentDidMount = async () => {
         configureGoogleSignIn()
@@ -60,12 +59,24 @@ export default class extends React.Component {
             }
         })
     }
-    _onHideUnderlay=()=> {
-        this.setState({ pressStatus: false });
-        }
-        _onShowUnderlay=()=> {
-        this.setState({ pressStatus: true });
-        }
+    chooseIndex=(singleEvent, index)=> {
+        event.map((e, i) => {
+            if (index == i) {
+                // console.log(singleEvent.iconshow)
+                singleEvent.status = true
+                this.setState({ singleEvent })
+                // console.log(singleEvent.iconshow)
+            }
+        })
+
+    }
+    changeValue = (value) => {
+        this.setState({
+            type: value
+        })
+
+    }
+
     render() {
         return (
             <Container>
@@ -121,23 +132,23 @@ export default class extends React.Component {
                                 <List key={index}>
                                     <ListItem selected >
                                         <Left>
-                                            <View > 
+                                            <View >
 
                                                 <View style={{ flexDirection: "row" }}>
 
                                                     <Image style={styles.image} source={singleEvent.image} />
                                                     {/* <Left> */}
-                                                        <View style={{ flexDirection: 'column', marginLeft: 10,marginTop:16 }}>
-                                                            <Label style={{ color: "red",fontWeight:'bold',fontSize:20,width:220 }}>{singleEvent.title}</Label>
-                                                            <Text style={{ color: "red",fontSize:18 }}>
-                                                                {moment(singleEvent.startTime.dateTime).format("Do MMM")},
-                                                                
+                                                    <View style={{ flexDirection: 'column', marginLeft: 10, marginTop: 16 }}>
+                                                        <Label style={{ color: "red", fontWeight: 'bold', fontSize: 20, width: 220 }}>{singleEvent.title}</Label>
+                                                        <Text style={{ color: "red", fontSize: 18 }}>
+                                                            {moment(singleEvent.startTime.dateTime).format("Do MMM")},
+
                                                                 {moment(singleEvent.startTime.dateTime).format(' h:mma ')}to
                                                                 {moment(singleEvent.endTime.dateTime).format(' h:mma')}
-                                                            </Text>
-                                                        </View>
+                                                        </Text>
+                                                    </View>
 
-                                                    
+
                                                 </View>
 
 
@@ -145,10 +156,30 @@ export default class extends React.Component {
 
 
 
-                                                    <Text style={{ color: "black",marginTop:10,fontSize:16,width:350 }}>{singleEvent.summary}</Text>
+                                                    <Text style={{ color: "black", marginTop: 10, fontSize: 16, width: 350 }}>{singleEvent.summary}</Text>
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                                        <Button  style={styles.braveButton}><Text style={{ color: 'white', margin: 24,fontSize:18 }}>Brave</Text></Button>
-                                                        <Button  style={{ width: "32%",backgroundColor:"#2f96e3" }}><Text style={{ color: 'white', margin: 14,fontSize:18 }}>Ambitious</Text></Button>
+                                                        <Button
+                                                            // style={singleEvent.status ? styles.PressbraveButton : styles.braveButton}
+                                                            style={singleEvent.status && this.state.type == "brave" ? styles.PressbraveButton : styles.braveButton}
+
+
+                                                            onPress={() => {
+                                                                this.changeValue("brave")
+                                                                // this.chooseIndex(singleEvent,index)
+                                                            }}
+                                                        >
+                                                            <Text style={{ color: 'white', margin: 24, fontSize: 18 }}>Brave</Text>
+                                                        </Button>
+                                                        <Button 
+                                                        // style={singleEvent.status ? styles.PressAmbitiousButton : styles.AmbitiousButton}
+                                                        style={singleEvent.status && this.state.type == "ambitious" ? styles.PressAmbitiousButton : styles.AmbitiousButton}
+    
+                                                        onPress={() => {
+                                                                this.changeValue("ambitious"),this.chooseIndex(singleEvent,index)
+                                                            }}
+                                                        >
+                                                            <Text style={{ color: 'white', margin: 18, fontSize: 18 }}>Ambitious</Text>
+                                                        </Button>
 
                                                     </View>
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
@@ -171,14 +202,14 @@ export default class extends React.Component {
 
                                         <Right>
                                             {singleEvent.iconshow == true &&
-                                                <Button transparent style={{ width: 50, marginBottom: 300}}
+                                                <Button transparent style={{ width: 50, marginBottom: 300 }}
                                                     onPress={() => {
                                                         this.handleCreateEvent(singleEvent),
                                                             this.removelist(index, singleEvent)
 
 
                                                     }} >
-                                                    <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b',marginLeft:20 }} size={38} />
+                                                    <FontAwesomeIcon icon={faCalendarPlus} style={{ color: '#00008b', marginLeft: 20 }} size={38} />
 
 
                                                 </Button>}
@@ -209,10 +240,12 @@ const styles = StyleSheet.create({
         resizeMode: "cover",
         height: 120,
         width: 100,
-        marginTop:10
+        marginTop: 10
     },
-    braveButton:{ width: "30%",backgroundColor:"#dd9d2b", marginRight: 20 },
-    PressbraveButton:{ width: "30%",backgroundColor:"#dd9d2b",borderColor:'grey', marginRight: 20 },
+    braveButton: { width: "30%", backgroundColor: "#dd9d2b", marginRight: 20 },
+    PressbraveButton: { width: "30%", backgroundColor: "#dd9d2b", borderColor: 'grey', marginRight: 20, borderWidth: 3 },
+    AmbitiousButton: { width: "36%", backgroundColor: "#2f96e3" },
+    PressAmbitiousButton: { width: "36%", backgroundColor: "#2f96e3", borderColor: 'grey', borderWidth: 3 },
     divider: {
         borderBottomColor: '#808080',
         borderBottomWidth: 1,

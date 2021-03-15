@@ -13,8 +13,8 @@ var event = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/hiking.jpg")
-
+    image: require("../image/hiking.jpg"),
+status:false
   },
   {
     eventId: 2,
@@ -30,7 +30,8 @@ var event = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/ArtExhibition.jpg")
+    image: require("../image/ArtExhibition.jpg"),
+    status:false
 
   },
   {
@@ -154,7 +155,10 @@ var event = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image10.jpg")
+    image: require("../image/image10.jpg"),
+    status:false
+
+
 
 
   },
@@ -172,7 +176,8 @@ var event = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image11.jpg")
+    image: require("../image/image11.jpg"),
+    status:false
 
 
   },
