@@ -8,6 +8,7 @@ import { listCalendar, createEvent, listEvents, createCalendar } from '../calend
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
 import {getTagFrequencyTable} from '../RuleEngine/api-rule-engine'
+import EventCategory from './EventCategory'
 export default class extends React.Component {
     state = {
         loggedIn: false,
@@ -22,16 +23,16 @@ export default class extends React.Component {
         userProfile: {
             userId: 1,
             eventsAddedToCalendar: [  
-              { 
-                eventId: 1,
-                opinion:[ 'brave' ],
-                liked: true
-              },
-              {
-                eventId:3,
-                opinion:["brave", "ambitious"],
-                liked: true
-              }
+            //   { 
+            //     eventId: 1,
+            //     opinion:[ 'brave' ],
+            //     liked: true
+            //   },
+            //   {
+            //     eventId:3,
+            //     opinion:["brave", "ambitious"],
+            //     liked: true
+            //   }
             ]
           }
     }
@@ -41,7 +42,8 @@ export default class extends React.Component {
         if (response.success) {
           
             let table= getTagFrequencyTable(this.state.userProfile)
-            alert(JSON.stringify(table))
+            //alert(JSON.stringify(table))
+            console.log(table)
             this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: event})
         }
         else {
@@ -93,13 +95,7 @@ export default class extends React.Component {
     //     })
 
     // }
-    changeOpnioin = (value) => {// brave or ambitious
-        
-        this.setState({
-            opinion: value,
-                })
 
-    }
     changeValue = (value) => {//like or dislike
         
         this.setState({
@@ -109,7 +105,27 @@ export default class extends React.Component {
 
     }
 
+    handleOpinion=(singleEvent, userOpinion)=>{
+        const {state}= this
+        const eventInfo={
+            eventId: singleEvent['eventId'],
+            opinion:[ userOpinion],
+            liked: true
+          }
+       const userProfile= state.userProfile
+       const featuredEvent= state.featuredEvents
+   //    featuredEvent.push(singleEvent)
+       userProfile['eventsAddedToCalendar'].push(eventInfo)
+       this.setState({userProfile:userProfile},()=>{
+       console.log( this.state.userProfile['eventsAddedToCalendar']  )
+       let table= getTagFrequencyTable(this.state.userProfile)
+       console.log(table)
+    })
+
+    }
+
     render() {
+        const {state}= this
         return (
             <Container>
                 <Content>

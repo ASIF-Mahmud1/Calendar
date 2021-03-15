@@ -186,6 +186,78 @@ var event = [
 
   },
 ]
+
+const  newEvents = [
+  {
+    eventId: 11,
+    title: "Trail Running",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
+    tag: ["adventurous"],
+    endTime: {
+      "dateTime": "2021-03-04T14:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-03-04T12:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/image100.jpg"),
+
+  },
+  {
+    eventId: 12,
+    title: "Music Festival",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
+    tag: ["art"],
+    endTime: {
+      "dateTime": "2021-03-12T20:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-03-12T16:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/image100.jpg"),
+
+  },
+  {
+    eventId: 13,
+    title: "Will AI take over the World ?",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi",
+    tag: ["science","adventurous"],
+    endTime: {
+      "dateTime": "2021-04-04T14:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-04-04T12:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/image100.jpg"),
+
+  },
+  {
+    eventId: 14,
+    title: " Girls Inc. | Inspiring All Girls to be Strong, Smart, & Bold",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
+    tag: ["empowerment"],
+    endTime: {
+      "dateTime": "2021-03-05T14:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-03-05T12:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/image100.jpg"),
+
+  }
+]
 export {
-  event
+  event,
+  newEvents
 }
