@@ -151,7 +151,7 @@ var event = [
     eventId: 9,
     title: "Women's Empowerment 2021",
     summary: "This event is to help empower, uplift and encourage women all over the world to THRIVE in life! Your authenticity is Be•You•tiful !",
-    tag: ["art"],
+    tag: ["empowerment"],
     endTime: {
       "dateTime": "2021-04-24T19:00:00.000Z",
       "timeZone": "BST"
@@ -191,7 +191,7 @@ const  newEvents = [
   {
     eventId: 11,
     title: "Trail Running",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
+    summary: "Although trail running is similar to running on the roads, there are some differences to make note of before you hit the trailhead. To help you get started, we pulled together a list of our best trail running tips that will guide you. While they may seem like a lot, they’re not hard to do!",
     tag: ["adventurous"],
     endTime: {
       "dateTime": "2021-03-04T14:00:00.000Z",
@@ -202,13 +202,13 @@ const  newEvents = [
       "timeZone": "BST" // 'America/Los_Angeles'
     },
     iconshow: true,
-    image: require("../image/image100.jpg"),
+    image: require("../image/featuredEvents/trail-run.jpg"),
 
   },
   {
     eventId: 12,
     title: "Music Festival",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
+    summary:"The Royal Albert Hall is a concert hall on the northern edge of South Kensington, London. One of the United Kingdom's most treasured and distinctive buildings, it is held in trust for the nation and managed by a registered charity. " ,
     tag: ["art"],
     endTime: {
       "dateTime": "2021-03-12T20:00:00.000Z",
@@ -219,13 +219,13 @@ const  newEvents = [
       "timeZone": "BST" // 'America/Los_Angeles'
     },
     iconshow: true,
-    image: require("../image/image100.jpg"),
+    image: require("../image/featuredEvents/art.jpg"),
 
   },
   {
     eventId: 13,
     title: "Will AI take over the World ?",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi",
+    summary: "While narrow AI can outperform humans in some tasks, there's little to suggest that more general AI that can emulate humans' ability to respond to many different tasks will be delivered and put humans at risk in the near future. Even without a singularity, AI will have a dramatic impact on human society.",
     tag: ["science"],
     endTime: {
       "dateTime": "2021-04-04T14:00:00.000Z",
@@ -236,13 +236,13 @@ const  newEvents = [
       "timeZone": "BST" // 'America/Los_Angeles'
     },
     iconshow: true,
-    image: require("../image/image100.jpg"),
+    image: require("../image/featuredEvents/science.jpg"),
 
   },
   {
     eventId: 14,
     title: " Girls Inc. | Inspiring All Girls to be Strong, Smart, & Bold",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus ipsum nec risus facilisis iaculis. Nullam quam massa, viverra suscipit turpis sit amet, tempor pretium felis. Aliquam quis vestibulum nisi.",
+    summary: "Our comprehensive approach addresses all aspects of a girl’s life and helps her discover and develop her inherent strengths. Girls receive programming to grow up healthy, educated, and independent.",
     tag: ["empowerment"],
     endTime: {
       "dateTime": "2021-03-05T14:00:00.000Z",
@@ -253,7 +253,7 @@ const  newEvents = [
       "timeZone": "BST" // 'America/Los_Angeles'
     },
     iconshow: true,
-    image: require("../image/image100.jpg"),
+    image: require("../image/featuredEvents/empowerment.jpg"),
 
   }
 ]

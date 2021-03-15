@@ -131,7 +131,7 @@ const removeDuplicateEvents=(featuredEvents)=>{
   return removeDuplicate
 }
 const recommendEvents = (newEvents, tagWithProbability)=>{
-  const numberOfFeaturedEvent=2
+  const numberOfFeaturedEvent=4
   let featuredEvents =[]
 
   for (const tag in tagWithProbability) 
