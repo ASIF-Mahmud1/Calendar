@@ -58,12 +58,13 @@ export default class extends React.Component {
             }
         })
     }
-    chooseIndex = (singleEvent, index) => {
+    chooseIndex = ( index) => {
+       
         event.map((e, i) => {
             if (index == i) {
                
-                singleEvent.status = true
-                this.setState({ singleEvent })
+            //    this.state.indexValue=index
+                this.setState({index:indexValue })
                
             }
         })
@@ -171,7 +172,7 @@ export default class extends React.Component {
 
 
                                                             onPress={() => {
-                                                                this.changeOpnioin("brave")
+                                                                this.changeOpnioin("brave"),this.chooseIndex(index)
                                                             }}
                                                         >
                                                             <Text style={{ color: 'white', margin: 24, fontSize: 18 }}>Brave</Text>

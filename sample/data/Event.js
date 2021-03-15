@@ -14,7 +14,7 @@ var event = [
     },
     iconshow: true,
     image: require("../image/hiking.jpg"),
-status:''
+    status:false
   },
   {
     eventId: 2,
@@ -32,6 +32,7 @@ status:''
     iconshow: true,
     image: require("../image/ArtExhibition.jpg"),
     status:false
+   
 
   },
   {
@@ -48,7 +49,8 @@ status:''
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/AI_Reasearch.jpg")
+    image: require("../image/AI_Reasearch.jpg"),
+    status:false
 
   },
   {
@@ -65,7 +67,9 @@ status:''
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image4.jpg")
+    image: require("../image/image4.jpg"),
+    status:false
+
 
 
   },
@@ -83,7 +87,9 @@ status:''
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image5.jpg")
+    image: require("../image/image5.jpg"),
+    status:false
+
 
 
   },
@@ -93,7 +99,7 @@ status:''
     summary: "Join us for our fifth annual Women in Data Science conference, featuring outstanding women in the field!The conference will feature exclusively female speakers doing outstanding work in the field of data science, but it is open to all, regardless of gender.",
     tag: ["science"],
     endTime: {
-      "dateTime": "2021-03-18T12:00:00.000Z",
+      "dateTime": "2021-03-17T12:00:00.000Z",
       "timeZone": "BST"
     },
     startTime: {
@@ -101,7 +107,9 @@ status:''
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image7.jpg")
+    image: require("../image/image7.jpg"),
+    status:false
+
 
 
   },
@@ -119,7 +127,9 @@ status:''
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image8.jpg")
+    image: require("../image/image8.jpg"),
+    status:false
+
 
 
   },
@@ -137,7 +147,9 @@ status:''
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image9.jpg")
+    image: require("../image/image9.jpg"),
+    status:false
+
 
 
   },
@@ -157,6 +169,7 @@ status:''
     iconshow: true,
     image: require("../image/image10.jpg"),
     status:false
+   
 
 
 
@@ -178,6 +191,7 @@ status:''
     iconshow: true,
     image: require("../image/image11.jpg"),
     status:false
+   
 
 
   },
