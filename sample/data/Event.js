@@ -14,7 +14,7 @@ var event = [
     },
     iconshow: true,
     image: require("../image/hiking.jpg"),
-    status:''
+    status:true
   },
   {
     eventId: 2,
@@ -32,6 +32,7 @@ var event = [
     iconshow: true,
     image: require("../image/ArtExhibition.jpg"),
  
+    status:true
    
 
   },
@@ -50,6 +51,8 @@ var event = [
     },
     iconshow: true,
     image: require("../image/AI_Reasearch.jpg"),
+    status:true
+
 
   },
   {
@@ -67,6 +70,7 @@ var event = [
     },
     iconshow: true,
     image: require("../image/image4.jpg"),
+    status:true
 
 
 
