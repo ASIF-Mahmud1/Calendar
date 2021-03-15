@@ -177,8 +177,8 @@ export default class extends React.Component {
 
                     {this.state.loggedIn &&
                      <>
-                     <EventCategory  featuredEvent={true} allEvents={state.featuredEvents }  handleOpinion={ this.handleOpinion} handleCreateEvent={this.handleCreateEvent}  changeIcon={this.changeIcon}  chooseIndex ={this.chooseIndex} opinion={this.state.opinion} type ={this.state.type} />
-                     <EventCategory featuredEvent={false} allEvents={state.allEvents }  handleOpinion={ this.handleOpinion} handleCreateEvent={this.handleCreateEvent}  changeIcon={this.changeIcon} chooseIndex ={this.chooseIndex} />
+                     <EventCategory  featuredEvent={true}  allEvents={state.featuredEvents }  handleOpinion={ this.handleOpinion} handleCreateEvent={this.handleCreateEvent}  changeIcon={this.changeIcon}  chooseIndex ={this.chooseIndex} opinion={this.state.opinion} type ={this.state.type}  changeValue ={this.changeValue} />
+                     <EventCategory  featuredEvent={false} allEvents={state.allEvents }  handleOpinion={ this.handleOpinion} handleCreateEvent={this.handleCreateEvent}  changeIcon={this.changeIcon} chooseIndex ={this.chooseIndex} opinion={this.state.opinion} type ={this.state.type}  changeValue ={this.changeValue}  />
                      </> 
                     }
 
