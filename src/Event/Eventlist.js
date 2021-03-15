@@ -59,7 +59,7 @@ export default class extends React.Component {
             }
         })
     }
-    chooseIndex=(singleEvent, index)=> {
+    chooseIndex = (singleEvent, index) => {
         event.map((e, i) => {
             if (index == i) {
                 // console.log(singleEvent.iconshow)
@@ -71,6 +71,7 @@ export default class extends React.Component {
 
     }
     changeValue = (value) => {
+        
         this.setState({
             type: value
         })
@@ -160,22 +161,23 @@ export default class extends React.Component {
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                                         <Button
                                                             // style={singleEvent.status ? styles.PressbraveButton : styles.braveButton}
-                                                            style={singleEvent.status && this.state.type == "brave" ? styles.PressbraveButton : styles.braveButton}
+                                                            style={this.state.type == "brave" ? styles.PressbraveButton : styles.braveButton}
 
 
                                                             onPress={() => {
                                                                 this.changeValue("brave")
-                                                                // this.chooseIndex(singleEvent,index)
+                                                                //  this.chooseIndex(singleEvent,index)
                                                             }}
                                                         >
                                                             <Text style={{ color: 'white', margin: 24, fontSize: 18 }}>Brave</Text>
                                                         </Button>
-                                                        <Button 
-                                                        // style={singleEvent.status ? styles.PressAmbitiousButton : styles.AmbitiousButton}
-                                                        style={singleEvent.status && this.state.type == "ambitious" ? styles.PressAmbitiousButton : styles.AmbitiousButton}
-    
-                                                        onPress={() => {
-                                                                this.changeValue("ambitious"),this.chooseIndex(singleEvent,index)
+                                                        <Button
+                                                            // style={singleEvent.status ? styles.PressAmbitiousButton : styles.AmbitiousButton}
+                                                            style={this.state.type == "ambitious" ? styles.PressAmbitiousButton : styles.AmbitiousButton}
+
+                                                            onPress={() => {
+                                                                this.changeValue("ambitious")
+                                                                // this.chooseIndex(singleEvent,index)
                                                             }}
                                                         >
                                                             <Text style={{ color: 'white', margin: 18, fontSize: 18 }}>Ambitious</Text>
@@ -183,12 +185,18 @@ export default class extends React.Component {
 
                                                     </View>
                                                     <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                                        <Button transparent style={{ marginLeft: 30 }}>
-                                                            <FontAwesomeIcon icon={faThumbsUp} style={{ color: '#00008b', }} size={26} />
+                                                        <Button transparent style={{ marginLeft: 30 }}onPress={() => {
+                                                                this.changeValue("like")
+                                                                // this.chooseIndex(singleEvent,index)
+                                                            }}>
+                                                            <FontAwesomeIcon icon={faThumbsUp} style={this.state.type == "like" ?styles.Presslike:styles.like} size={26} />
 
                                                         </Button>
-                                                        <Button transparent style={{ marginLeft: 80 }}>
-                                                            <FontAwesomeIcon icon={faThumbsDown} style={{ color: '#00008b', marginTop: 10 }} size={26} />
+                                                        <Button transparent style={{ marginLeft: 80 }}onPress={() => {
+                                                                this.changeValue("dislike")
+                                                                // this.chooseIndex(singleEvent,index)
+                                                            }}>
+                                                            <FontAwesomeIcon icon={faThumbsDown} style={this.state.type == "dislike" ?styles.Pressdislike:styles.dislike} size={26} />
 
                                                         </Button>
 
@@ -246,6 +254,10 @@ const styles = StyleSheet.create({
     PressbraveButton: { width: "30%", backgroundColor: "#dd9d2b", borderColor: 'grey', marginRight: 20, borderWidth: 3 },
     AmbitiousButton: { width: "36%", backgroundColor: "#2f96e3" },
     PressAmbitiousButton: { width: "36%", backgroundColor: "#2f96e3", borderColor: 'grey', borderWidth: 3 },
+    like: { color: '#D3D3D3' },
+    Presslike: { color: 'black' },
+    dislike: { color: '#D3D3D3', marginTop: 10 },
+    Pressdislike: { color: 'black', marginTop: 10 },
     divider: {
         borderBottomColor: '#808080',
         borderBottomWidth: 1,

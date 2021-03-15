@@ -14,7 +14,7 @@ var event = [
     },
     iconshow: true,
     image: require("../image/hiking.jpg"),
-status:false
+status:''
   },
   {
     eventId: 2,
