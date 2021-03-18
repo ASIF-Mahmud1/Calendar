@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
+import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right ,Icon} from 'native-base';
 import { event, newEvents  } from '../../sample/data/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
-import {getTagFrequencyTable, recommendEvents} from '../RuleEngine/api-rule-engine'
+import {getTagFrequencyTable, recommendEvents, getEventsBasedOnOpinion} from '../RuleEngine/api-rule-engine'
 import EventCategory from './EventCategory'
 export default class extends React.Component {
     state = {
@@ -36,24 +36,31 @@ export default class extends React.Component {
             ]
           }
     }
-    componentDidMount = async () => {
-        configureGoogleSignIn()
-        let response = await getCurrentUser();
-        if (response.success) {
-            let table= getTagFrequencyTable(this.state.userProfile)
-            //alert(JSON.stringify(table))
-            console.log(table)
-            this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: event},()=>{
-                const  allEvents= this.state.allEvents
-                allEvents.map((event)=>{
-                    event['liked']=null,
-                    event['userOpinion']= null
+    componentDidMount =  async() => {
+        this.props.navigation.addListener('focus', async () => {
+           
+            const opinion=this.props.route.params.opinion
+            alert(JSON.stringify( opinion)) 
+            configureGoogleSignIn()
+            let response = await getCurrentUser();
+            if (response.success) {
+                let table= getTagFrequencyTable(this.state.userProfile)
+                //alert(JSON.stringify(table))
+                console.log(table)
+                const eventBasedOnOpinion= getEventsBasedOnOpinion(event, opinion)
+                this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: eventBasedOnOpinion},()=>{
+                    const  allEvents= this.state.allEvents
+                    allEvents.map((event)=>{
+                        event['liked']=null,
+                        event['userOpinion']= null
+                    })
                 })
-            })
-        }
-        else {
-            this.setState({ loggedIn: false })
-        }
+            }
+            else {
+                this.setState({ loggedIn: false })
+            } 
+           
+          })
     }
     handleSignOut = async () => {
         let response = await signOut()
@@ -125,6 +132,8 @@ export default class extends React.Component {
             opinion:[ userOpinion],
             liked: true
           }
+        const opinion=this.props.route.params.opinion  
+        const eventBasedOnOpinion= getEventsBasedOnOpinion(newEvents, opinion)  
        const userProfile= state.userProfile
        const featuredEvent= state.featuredEvents
    //    featuredEvent.push(singleEvent)
@@ -132,8 +141,9 @@ export default class extends React.Component {
        this.setState({userProfile:userProfile},()=>{
        console.log( this.state.userProfile['eventsAddedToCalendar']  )
        let tagWithProbability= getTagFrequencyTable(this.state.userProfile)
-       const featuredEvents= recommendEvents(newEvents, tagWithProbability)
+       const featuredEvents= recommendEvents(eventBasedOnOpinion, tagWithProbability)
        this.setState({featuredEvents:featuredEvents})
+       console.log("Tag Probability", tagWithProbability)
        console.log("featuredEvent", featuredEvents)
       // alert(JSON.stringify(tagWithProbability))
     })
@@ -146,6 +156,12 @@ export default class extends React.Component {
             <Container>
                 <Content>
                     <Header>
+                        <Left>
+                            <Button transparent onPress={() => { this.props.navigation.goBack() }}>
+                              <Text  style={styles.loginText}>Back</Text>
+                            </Button>
+                        </Left>
+                      <Right>
                         {
                             this.state.loggedIn == false ?
                                 <View >
@@ -177,7 +193,7 @@ export default class extends React.Component {
                                 </View>
                         }
 
-
+                      </Right>
                     </Header>
                     {
                         this.state.loggedIn == false ?
