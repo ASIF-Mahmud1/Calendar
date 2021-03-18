@@ -62,7 +62,7 @@ export default class CounterApp extends Component {
                 ]}
               >
                 <TouchableOpacity
-                  onPress={() => {this.props.navigation.navigate('Eventlist') }}
+                  onPress={() => {this.props.navigation.navigate('Eventlist', {opinion:'brave'}) }}
                 >
                   <Text style={styles.buttonText}> Brave</Text>
                 </TouchableOpacity>
@@ -73,7 +73,7 @@ export default class CounterApp extends Component {
                 style={[styles.button, { top: 60 }]}
               >
                 <TouchableOpacity
-                  onPress={() => {this.props.navigation.navigate('Eventlist') }}
+                  onPress={() => {this.props.navigation.navigate('Eventlist', {opinion:'ambitious'}) }}
                 >
                   <Text style={styles.buttonText}>Ambitious</Text>
                 </TouchableOpacity>
@@ -84,7 +84,7 @@ export default class CounterApp extends Component {
                 style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
 
                 <TouchableOpacity
-                  onPress={() => { this.props.navigation.navigate('Eventlist') }}>
+                  onPress={() => { this.props.navigation.navigate('Eventlist', {opinion:'kind'}) }}>
                   <Text style={styles.buttonText}>kind</Text>
                 </TouchableOpacity>
               </LinearGradient>
@@ -99,7 +99,7 @@ export default class CounterApp extends Component {
                   { position: 'absolute', top: 240 },
                 ]}>
                 <TouchableOpacity
-                  onPress={() => { this.props.navigation.navigate('Eventlist')}}
+                  onPress={() => { this.props.navigation.navigate('Eventlist', {opinion:'optimistic'})}}
                 >
                   <Text style={styles.buttonText}>Optimistic</Text>
                 </TouchableOpacity>
