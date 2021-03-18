@@ -15,7 +15,13 @@ var event = [
     iconshow: true,
     image: require("../image/hiking.jpg"),
 like:false,
-dislike:false   
+dislike:false,
+usersOpininon: {
+  brave: 0.5,
+  ambitious: 0.2,
+  optimistic:0.1,
+  kind:0.2
+}   
   },
   {
     eventId: 2,
@@ -34,7 +40,13 @@ dislike:false
     image: require("../image/ArtExhibition.jpg"),
  
     like:false,
-    dislike:false
+    dislike:false,
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
    
 
   },
@@ -54,7 +66,13 @@ dislike:false
     iconshow: true,
     image: require("../image/AI_Reasearch.jpg"),
     like:false,
-    dislike:false
+    dislike:false,
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
   },
@@ -73,6 +91,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image4.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
    
 
 
@@ -93,6 +117,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image5.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
   },
@@ -111,6 +141,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image7.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
   },
@@ -129,6 +165,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image8.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
   },
@@ -147,6 +189,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image9.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
   },
@@ -165,6 +213,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image10.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
 
@@ -185,6 +239,12 @@ dislike:false
     },
     iconshow: true,
     image: require("../image/image11.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
 
   }
@@ -207,7 +267,13 @@ const  newEvents = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image12.jpg")
+    image: require("../image/image12.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
   },
   {
     eventId: 12,
@@ -223,7 +289,13 @@ const  newEvents = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image13.jpg")
+    image: require("../image/image13.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
   },
   {
     eventId: 13,
@@ -239,7 +311,13 @@ const  newEvents = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image14.jpg")
+    image: require("../image/image14.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
   },
   {
     eventId: 14,
@@ -255,7 +333,13 @@ const  newEvents = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image15.jpg")
+    image: require("../image/image15.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
   },
   {
     eventId: 15,
@@ -271,7 +355,13 @@ const  newEvents = [
       "timeZone": "BST"
     },
     iconshow: true,
-    image: require("../image/image16.jpg")
+    image: require("../image/image16.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
   },
   {
     eventId: 16,
@@ -288,6 +378,12 @@ const  newEvents = [
     },
     iconshow: true,
     image: require("../image/featuredEvents/trail-run.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
   },
   {
@@ -305,6 +401,12 @@ const  newEvents = [
     },
     iconshow: true,
     image: require("../image/featuredEvents/art.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
   },
   {
@@ -322,6 +424,12 @@ const  newEvents = [
     },
     iconshow: true,
     image: require("../image/featuredEvents/science.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
   },
   {
@@ -339,6 +447,12 @@ const  newEvents = [
     },
     iconshow: true,
     image: require("../image/featuredEvents/empowerment.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
   }
 ]
