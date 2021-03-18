@@ -12,7 +12,6 @@ function App() {
       <Stack.Navigator>
       <Stack.Screen name="OpninoinList" component={OpninoinList} />
         <Stack.Screen name="Eventlist" component={Eventlist} />
-        {/* <Stack.Screen name="Prescription" component={Prescription} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
