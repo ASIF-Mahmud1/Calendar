@@ -157,6 +157,34 @@ const recommendEvents = (newEvents, tagWithProbability)=>{
 //  const results= recommendEvents(newEvents,tagWithProbability)
 //  console.log("Recommended Events \n",results) 
 
+const getEventsBasedOnOpinion= (eventList, opinion)=>{
+  let result= eventList.filter((singleEvent, index)=>{
+    const authorOpinion = singleEvent['tag'].find(tag => tag == opinion) // search for opinion in the tag list
+    if ( opinion== authorOpinion )      // author opinion matches, with opinion we are  looking for
+    {
+      singleEvent['weightedOpinion']= singleEvent["usersOpininon"][opinion]+ 1   // 50 % weight to userOpinion and 50 % weight to authorOpinion 
+    }
+    else                                              // author's opinion doesn't match with the opinion we are looking for
+    {
+      singleEvent['weightedOpinion']= singleEvent["usersOpininon"][opinion]
+    }
+   
+    return singleEvent['weightedOpinion']  > 0
+  })
+
+  // sort event based on weighted opinion
+  result= result.sort(function (firstEvent, secondEvent) {
+    return secondEvent['weightedOpinion'] - firstEvent['weightedOpinion']
+  })
+
+  return result
+}
+
+// const eventBasedOnOpinion=  getEventsBasedOnOpinion(newEvents, "brave")
+// console.log("Prefered Events \n",eventBasedOnOpinion)
+
+
+
 //  // Shuffle array
 // const shuffled = array.sort(() => 0.5 - Math.random());
 
@@ -165,5 +193,6 @@ const recommendEvents = (newEvents, tagWithProbability)=>{
 
 export{
     getTagFrequencyTable,
-    recommendEvents
+    recommendEvents,
+    getEventsBasedOnOpinion
 }
