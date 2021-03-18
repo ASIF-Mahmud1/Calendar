@@ -1,12 +1,21 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Eventlist from './Eventlist'
+import OpninoinList from './OpninoinList'
+const Stack = createStackNavigator();
 
-export default class HelloWorldApp extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello, world!</Text>
-      </View>
-    );
-  }
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen name="OpninoinList" component={OpninoinList} />
+        <Stack.Screen name="Eventlist" component={Eventlist} />
+        {/* <Stack.Screen name="Prescription" component={Prescription} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
+
+export default App; 
