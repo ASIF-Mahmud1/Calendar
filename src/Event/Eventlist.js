@@ -145,20 +145,21 @@ export default class extends React.Component {
                 <Content>
                     <Header>
                         {
-                            this.state.loggedIn == false ?
-                                <View >
+                            this.state.loggedIn  &&
+                             //?
+                                // <View >
                                     
-                                    <TouchableOpacity
-                                        style={styles.signIn}
-                                        onPress={() => { this.handleSignIn() }} >
-                                        <View style={styles.view}>
-                                            <FontAwesomeIcon icon={faSignInAlt} style={styles.loginicon} size={20} />
+                                //     <TouchableOpacity
+                                //         style={styles.signIn}
+                                //         onPress={() => { this.handleSignIn() }} >
+                                //         <View style={styles.view}>
+                                //             <FontAwesomeIcon icon={faSignInAlt} style={styles.loginicon} size={20} />
 
-                                            <Text style={styles.loginText}>Login</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>
-                                :
+                                //             <Text style={styles.loginText}>Login</Text>
+                                //         </View>
+                                //     </TouchableOpacity>
+                                // </View>
+                                // :
                                 <View style={styles.view} >
                                     <TouchableOpacity
                                          style={styles.back}
@@ -184,7 +185,7 @@ export default class extends React.Component {
 
 
                     </Header>
-                    {
+                    {/* {
                         this.state.loggedIn == false ?
                             <View>
                                 <Text style={styles.text}>You need to LogIn</Text>
@@ -193,7 +194,7 @@ export default class extends React.Component {
                             <View>
 
                             </View>
-                    }
+                    } */}
 
 
                     {this.state.loggedIn &&
