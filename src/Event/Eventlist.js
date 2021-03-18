@@ -205,9 +205,9 @@ export default class extends React.Component {
 const styles = StyleSheet.create({
     HeaderButton:{ marginTop: 10, width: 100, marginLeft: 250 },
     signIn:{ marginTop: 15, marginLeft: 250 },
-    loginicon:{ color: 'white', marginTop: 5 },
+    loginicon:{ color: 'white', marginTop: 2 },
     loginText:{ fontSize: 20, fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5 },
-    logoutIcon:{ color: 'white', marginTop: 5, marginLeft: 10 },
+    logoutIcon:{ color: 'white', marginTop: 2, marginLeft: 10 },
     logoutText:{ fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5, fontSize: 20, marginRight: 10 },
     text:{ fontSize: 20, fontWeight: "bold" },
    // listView CSS
