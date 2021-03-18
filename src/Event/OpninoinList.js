@@ -34,8 +34,8 @@ export default class CounterApp extends Component {
     }
   };
 
- 
-  
+
+
   toggleMe(value) {
     this.setState({
       type: value
@@ -46,73 +46,73 @@ export default class CounterApp extends Component {
     return (
       <Container>
         <Content>
-          <Header/>
-        {/* <View style={styles.container}> */}
-      
-      <View style={styles.btnContainer}>
+          <Header />
+          <View style={styles.container}>
 
-        <View style={styles.btnContainerMiddle}>
-          <LinearGradient
-            colors={['#9d50bb', '#6e48aa']}
-            start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-            // style={{ height: 48, width: 200, alignItems: 'center', justifyContent: 'center', width: 200}}
-            style={[
-              styles.button,
-              { position: 'absolute', left: -100, top: 150 },
-            ]}
-          >
-            <TouchableOpacity
-              onPress={() => {  }}
-            >
-              <Text style={styles.buttonText}> Brave</Text>
-            </TouchableOpacity>
-          </LinearGradient>
-          <LinearGradient
-           colors={['#9d50bb', '#6e48aa']}
-            start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-            style={[styles.button, { top: 60 }]}
-          >
-            <TouchableOpacity
-              onPress={() => {  }}
-            >
-              <Text style={styles.buttonText}>Ambitious</Text>
-            </TouchableOpacity>
-          </LinearGradient>
-          <LinearGradient
-            colors={['#9d50bb', '#6e48aa']}
-            start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-            style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
+          <View style={styles.btnContainer}>
 
-            <TouchableOpacity
-              onPress={() => { this.toggleMe("response3") }}>
-              <Text style={styles.buttonText}>kind</Text>
-            </TouchableOpacity>
-          </LinearGradient>
-        {/* </View> */}
-        
-        {/* <View style={styles.btnContainerMiddle}> */}
-          <LinearGradient
-           colors={['#9d50bb', '#6e48aa']}
-            start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-            style={[
-              styles.button,
-              { position: 'absolute',  top: 240 },
-            ]}>
-            <TouchableOpacity
-              onPress={() => {  }}
-            >
-              <Text style={styles.buttonText}>Optimistic</Text>
-            </TouchableOpacity>
-          </LinearGradient>
-         
+            <View style={styles.btnContainerMiddle}>
+              <LinearGradient
+                colors={['#9d50bb', '#6e48aa']}
+                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                // style={{ height: 48, width: 200, alignItems: 'center', justifyContent: 'center', width: 200}}
+                style={[
+                  styles.button,
+                  { position: 'absolute', left: -100, top: 150 },
+                ]}
+              >
+                <TouchableOpacity
+                  onPress={() => {this.props.navigation.navigate('Eventlist') }}
+                >
+                  <Text style={styles.buttonText}> Brave</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+              <LinearGradient
+                colors={['#9d50bb', '#6e48aa']}
+                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                style={[styles.button, { top: 60 }]}
+              >
+                <TouchableOpacity
+                  onPress={() => {this.props.navigation.navigate('Eventlist') }}
+                >
+                  <Text style={styles.buttonText}>Ambitious</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+              <LinearGradient
+                colors={['#9d50bb', '#6e48aa']}
+                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
 
-        </View>
-      </View>
-    {/* </View> */}
+                <TouchableOpacity
+                  onPress={() => { this.props.navigation.navigate('Eventlist') }}>
+                  <Text style={styles.buttonText}>kind</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+              {/* </View> */}
+
+              {/* <View style={styles.btnContainerMiddle}> */}
+              <LinearGradient
+                colors={['#9d50bb', '#6e48aa']}
+                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                style={[
+                  styles.button,
+                  { position: 'absolute', top: 240 },
+                ]}>
+                <TouchableOpacity
+                  onPress={() => { this.props.navigation.navigate('Eventlist')}}
+                >
+                  <Text style={styles.buttonText}>Optimistic</Text>
+                </TouchableOpacity>
+              </LinearGradient>
+
+
+            </View>
+          </View>
+          </View>
 
         </Content>
       </Container>
-     
+
 
 
 
@@ -123,13 +123,13 @@ export default class CounterApp extends Component {
 const styles = StyleSheet.create({
 
   container: {
-     flex: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     //marginTop:50
   },
   btnContainer: {
-     flex: 1,
+    flex: 1,
     justifyContent: 'center',
     // paddingTop: Constants.statusBarHeight,
     // backgroundColor: 'grey',
@@ -138,17 +138,15 @@ const styles = StyleSheet.create({
     height: 600,
     borderRadius: 100,
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     // backgroundColor:'red',
-     marginLeft:20,
-    // marginRight:20,
-    marginTop:50
+    
 
   },
   btnContainerMiddle: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom:250
+    marginBottom: 250
   },
   button: {
     margin: 40,
@@ -170,10 +168,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     padding: 15,
-   margin:1,
+    margin: 1,
     width: 150,
     fontSize: 16,
-    alignItems:'center'
+    alignItems: 'center'
   },
   Text: {
     textAlign: 'center',

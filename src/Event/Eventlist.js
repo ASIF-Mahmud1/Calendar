@@ -149,6 +149,9 @@ export default class extends React.Component {
                         {
                             this.state.loggedIn == false ?
                                 <View >
+                                    {/* <Left>
+                                        <Text>back</Text>
+                                    </Left> */}
                                     <TouchableOpacity
                                         style={styles.signIn}
                                         onPress={() => { this.handleSignIn() }} >
