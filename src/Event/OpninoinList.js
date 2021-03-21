@@ -20,6 +20,7 @@ export default class CounterApp extends Component {
     this.state = {
       loggedIn: false,
       accessToken: '',
+      viewButton:false,
     }
   };
 
@@ -47,6 +48,30 @@ export default class CounterApp extends Component {
       this.setState({ loggedIn: true, accessToken: response.success.accessToken })
     }
   }
+  ShowButtonForm = () => {
+    this.setState({
+      viewButton : !this.state.viewButton,
+    });
+};
+calendarForm() {
+  if (this.state.viewButton) {
+      return (
+          <View>
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  
+                 
+                      <TouchableOpacity
+                          style={styles.create}
+                          onPress={() => { this.props.navigation.navigate('Eventlist') }}>
+                          <Text style={styles.createtext}>Show Content </Text>
+                      </TouchableOpacity>
+               
+              </View>
+
+          </View>
+      )
+  }
+}
 
   render() {
 
@@ -114,7 +139,10 @@ export default class CounterApp extends Component {
                     ]}
                   >
                     <TouchableOpacity
-                      onPress={() => { this.props.navigation.navigate('Eventlist') }}
+                      onPress={() => { 
+                        // this.props.navigation.navigate('Eventlist')
+                        this.ShowButtonForm()
+                       }}
                     >
                       <Text style={styles.buttonText}> Brave</Text>
                     </TouchableOpacity>
@@ -125,7 +153,10 @@ export default class CounterApp extends Component {
                     style={[styles.button, { top: 60 }]}
                   >
                     <TouchableOpacity
-                      onPress={() => { this.props.navigation.navigate('Eventlist') }}
+                      onPress={() => { 
+                        // this.props.navigation.navigate('Eventlist') 
+                        this.ShowButtonForm()
+                      }}
                     >
                       <Text style={styles.buttonText}>Ambitious</Text>
                     </TouchableOpacity>
@@ -136,7 +167,10 @@ export default class CounterApp extends Component {
                     style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
 
                     <TouchableOpacity
-                      onPress={() => { this.props.navigation.navigate('Eventlist') }}>
+                      onPress={() => { 
+                        // this.props.navigation.navigate('Eventlist')
+                        this.ShowButtonForm()
+                         }}>
                       <Text style={styles.buttonText}>kind</Text>
                     </TouchableOpacity>
                   </LinearGradient>
@@ -151,7 +185,10 @@ export default class CounterApp extends Component {
                       { position: 'absolute', top: 240 },
                     ]}>
                     <TouchableOpacity
-                      onPress={() => { this.props.navigation.navigate('Eventlist') }}
+                      onPress={() => { 
+                        // this.props.navigation.navigate('Eventlist') 
+                        this.ShowButtonForm()
+                      }}
                     >
                       <Text style={styles.buttonText}>Optimistic</Text>
                     </TouchableOpacity>
@@ -160,7 +197,11 @@ export default class CounterApp extends Component {
 
                 </View>
               </View>
-            </View>}
+              {this.calendarForm()}
+
+            </View>
+            
+            }
 
         </Content>
       </Container>
@@ -239,4 +280,16 @@ const styles = StyleSheet.create({
     width: 180,
     fontSize: 16
   },
+  create: {
+    backgroundColor: '#009688',
+    marginBottom: 20,
+    alignItems: 'center',
+    margin: 30,
+    width: 200, height: 60, borderRadius: 5
+},
+createtext: {
+    fontSize: 24,
+    color: 'white',
+    fontWeight: "bold", marginTop: 10
+},
 });
