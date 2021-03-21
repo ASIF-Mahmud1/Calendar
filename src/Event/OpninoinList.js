@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import { List, ListItem, Body, Content, Header, Title, Left, Button, Container,Right } from 'native-base'
+import { List, ListItem, Body, Content, Header, Title, Left, Button, Container, Right } from 'native-base'
 import LinearGradient from 'react-native-linear-gradient';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
@@ -21,7 +21,8 @@ export default class CounterApp extends Component {
       type: '',
       loggedIn: false,
       accessToken: '',
-      viewButton:false,
+      viewButton: false,
+      show:false
     }
   };
 
@@ -49,33 +50,48 @@ export default class CounterApp extends Component {
     }
   }
 
-  ShowButtonForm = () => {
+  ShowButtonForm = (value) => {
     this.setState({
-      viewButton : !this.state.viewButton,
+      viewButton: !this.state.viewButton,
+      type: value,
+       show:!this.state.show,
     });
-};
-calendarForm() {
-  if (this.state.viewButton) {
+    console.log(this.state.type)
+  };
+  calendarForm() {
+    if (this.state.viewButton) {
       return (
-          <View>
-              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  
-                 
-                      <TouchableOpacity
-                          style={styles.create}
-                          onPress={() => { 
-                            // this.props.navigation.navigate('Eventlist') 
-                            this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
-                            }}>
-                          <Text style={styles.createtext}>Show Content </Text>
-                      </TouchableOpacity>
-               
-              </View>
+        <View>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          
+
+            <TouchableOpacity
+              style={styles.create}
+              onPress={() => {
+                // this.props.navigation.navigate('Eventlist') 
+                // this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
+
+                this.passvalue()
+                this.setState({viewButton:false,show:false})
+                // {this.state.type == "ambitious" && this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })}
+                // {this.state.type == "kind" && this.props.navigation.navigate('Eventlist', { opinion: 'kind' })}
+
+              }}>
+              <Text style={styles.createtext}>Show Content </Text>
+            </TouchableOpacity>
 
           </View>
+
+        </View>
       )
+    }
   }
-}
+  passvalue() {
+    { this.state.type == "ambitious" && this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' }) }
+    { this.state.type == "kind" && this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) }
+    {this.state.type == "brave" && this.props.navigation.navigate('Eventlist', { opinion: 'brave' })}
+    {this.state.type == "optimistic" && this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' })}
+  }
   render() {
 
     return (
@@ -114,7 +130,7 @@ calendarForm() {
                   </View>
                 </Right>
             }
-          </Header>   
+          </Header>
           {
             this.state.loggedIn == false ?
               <View>
@@ -124,82 +140,85 @@ calendarForm() {
               <View>
 
               </View>
-          }  
-          {this.state.loggedIn &&    
-           <View style={styles.container}>
+          }
+          {this.state.loggedIn &&
+            <View style={styles.container}>
 
-            <View style={styles.btnContainer}>
+              <View style={styles.btnContainer}>
 
-              <View style={styles.btnContainerMiddle}>
-                <LinearGradient
-                  colors={['#9d50bb', '#6e48aa']}
-                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                  style={[
-                    styles.button,
-                    { position: 'absolute', left: -100, top: 150 },
-                  ]}
-                >
-                  <TouchableOpacity
-                    onPress={() => { 
-                      this.ShowButtonForm()
-                      // this.props.navigation.navigate('Eventlist', { opinion: 'brave' }) 
-                    }}
+                <View style={styles.btnContainerMiddle}>
+                  <LinearGradient
+                    colors={this.state.show == true && this.state.type=='brave' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                    style={[
+                      styles.button,
+                      { position: 'absolute', left: -100, top: 150 },
+                    ]}
                   >
-                    <Text style={styles.buttonText}> Brave</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                  colors={['#9d50bb', '#6e48aa']}
-                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                  style={[styles.button, { top: 60 }]}
-                >
-                  <TouchableOpacity
-                    onPress={() => { 
-                      this.ShowButtonForm()
-                      // this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
-                     }}
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.ShowButtonForm('brave')
+                        // this.props.navigation.navigate('Eventlist', { opinion: 'brave' }) 
+                      }}
+                    >
+                      <Text style={styles.buttonText}> Brave</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
+                  <LinearGradient
+                    colors={this.state.show == true && this.state.type=='ambitious' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                    style={[styles.button, { top: 60 }]}
                   >
-                    <Text style={styles.buttonText}>Ambitious</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-                <LinearGradient
-                  colors={['#9d50bb', '#6e48aa']}
-                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                  style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
+                    <TouchableOpacity
+                    // style={this.state.show == true ?styles.ambitous:styles.Pressambitous}
+                    //  style={this.state.show == 'ambitious' ?[styles.button, { top: 60 }, {backgroundColor:'red'}]:[styles.button, { top: 60 }, {backgroundColor:'blue'}]}
+                      onPress={() => {
+                        this.ShowButtonForm('ambitious')
+                        // this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
+                      }}
+                    >
+                      <Text style={styles.buttonText}>Ambitious</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
+                  <LinearGradient
+                    colors={this.state.show == true && this.state.type=='kind' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                    style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
 
-                  <TouchableOpacity
-                    onPress={() => { 
-                      this.ShowButtonForm()
-                      // this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) 
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.ShowButtonForm('kind')
+                        // this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) 
                       }}>
-                    <Text style={styles.buttonText}>kind</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
-                {/* </View> */}
+                      <Text style={styles.buttonText}>kind</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
+                  {/* </View> */}
 
-                {/* <View style={styles.btnContainerMiddle}> */}
-                <LinearGradient
-                  colors={['#9d50bb', '#6e48aa']}
-                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                  style={[
-                    styles.button,
-                    { position: 'absolute', top: 240 },
-                  ]}>
-                  <TouchableOpacity
-                    onPress={() => { 
-                      this.ShowButtonForm()
-                      // this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' }) 
-                    }}
-                  >
-                    <Text style={styles.buttonText}>Optimistic</Text>
-                  </TouchableOpacity>
-                </LinearGradient>
+                  {/* <View style={styles.btnContainerMiddle}> */}
+                  <LinearGradient
+                    colors={this.state.show == true && this.state.type=='optimistic' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                    style={[
+                      styles.button,
+                      { position: 'absolute', top: 240 },
+                    ]}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.ShowButtonForm('optimistic')
+                        // this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' }) 
+                      }}
+                    >
+                      <Text style={styles.buttonText}>Optimistic</Text>
+                    </TouchableOpacity>
+                  </LinearGradient>
 
 
+                </View>
+                {this.calendarForm()}
               </View>
-            </View>
-            {this.calendarForm()}
-          </View>}
+            
+            </View>}
 
         </Content>
       </Container>
@@ -217,7 +236,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    //marginTop:50
+    marginBottom:50
   },
   btnContainer: {
     flex: 1,
@@ -282,15 +301,40 @@ const styles = StyleSheet.create({
   text: { fontSize: 20, fontWeight: "bold" },
   //content button
   create: {
-    backgroundColor: '#009688',
+    backgroundColor: '#66023c',
     marginBottom: 20,
     alignItems: 'center',
-    margin: 30,
+    // margin: 20,
     width: 200, height: 60, borderRadius: 5
-},
-createtext: {
+  },
+  createtext: {
     fontSize: 24,
     color: 'white',
-    fontWeight: "bold", marginTop: 10
-},
+    fontWeight: "bold", marginTop: 15
+  },
+  //ambitious 
+  ambitous:{
+   
+      margin: 40,
+      width: 90,
+      height: 90,
+      borderRadius: 90,
+      justifyContent: 'center',
+      alignItems: 'center',
+      top:60,
+      backgroundColor:'red'
+    
+  },
+  Pressambitous:{
+   
+    margin: 40,
+    width: 90,
+    height: 90,
+    borderRadius: 90,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top:60,
+    backgroundColor:'black'
+  
+}
 });

@@ -159,7 +159,11 @@ export default class extends React.Component {
                         <Left>
                         <TouchableOpacity
                                          style={styles.back}
-                                         onPress={() => this.props.navigation.goBack()}>
+                                         onPress={() => 
+                                            this.props.navigation.goBack()
+                                          
+                                         
+                                         }>
                                         <View style={styles.view}>
                                             <FontAwesomeIcon icon={faArrowLeft} style={styles.loginicon} size={20} />
                                         </View>
