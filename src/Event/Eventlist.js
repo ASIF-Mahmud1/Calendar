@@ -46,7 +46,7 @@ export default class extends React.Component {
             if (response.success) {
                 let table= getTagFrequencyTable(this.state.userProfile)
                 //alert(JSON.stringify(table))
-                console.log(table)
+                console.log("table",table)
                 const eventBasedOnOpinion= getEventsBasedOnOpinion(event, opinion)
                 this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: eventBasedOnOpinion},()=>{
                     const  allEvents= this.state.allEvents
