@@ -1,18 +1,4 @@
-// import React, { Component } from 'react';
-// import { Text, View } from 'react-native';
-// import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
-// export default class HelloWorldApp extends Component {
-//   render() {
-//     return (
-//       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-//         <Text>Hello, world opinion!</Text>
-//         <Button block success onPress={() => { this.props.navigation.navigate('Eventlist') }}>
-//                             <Text>Eventlist</Text>
-//                         </Button>
-//       </View>
-//     );
-//   }
-// }
+
 import React, { Component } from 'react';
 import {
   SafeAreaView,
@@ -21,94 +7,199 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import { List, ListItem, Body, Content, Header, Title, Left, Button, Container } from 'native-base'
+import { List, ListItem, Body, Content, Header, Title, Left, Button, Container,Right } from 'native-base'
 import LinearGradient from 'react-native-linear-gradient';
-
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth';
 export default class CounterApp extends Component {
   constructor(props) {
     super(props);
     this.props = props;
 
     this.state = {
-      type: ''
+      type: '',
+      loggedIn: false,
+      accessToken: '',
+      viewButton:false,
     }
   };
 
-
-
-  toggleMe(value) {
-    this.setState({
-      type: value
-    })
+  componentDidMount = async () => {
+    configureGoogleSignIn()
+    let response = await getCurrentUser();
+    if (response.success) {
+      this.setState({ accessToken: response.success.accessToken, loggedIn: true })
+    }
+    else {
+      this.setState({ loggedIn: false })
+    }
   }
+  handleSignOut = async () => {
+    let response = await signOut()
+    if (response.success) {
+      this.setState({ loggedIn: false })
+    }
+  }
+
+  handleSignIn = async () => {
+    let response = await signIn()
+    if (response.success) {
+      this.setState({ loggedIn: true, accessToken: response.success.accessToken })
+    }
+  }
+
+  ShowButtonForm = () => {
+    this.setState({
+      viewButton : !this.state.viewButton,
+    });
+};
+calendarForm() {
+  if (this.state.viewButton) {
+      return (
+          <View>
+              <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  
+                 
+                      <TouchableOpacity
+                          style={styles.create}
+                          onPress={() => { 
+                            // this.props.navigation.navigate('Eventlist') 
+                            this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
+                            }}>
+                          <Text style={styles.createtext}>Show Content </Text>
+                      </TouchableOpacity>
+               
+              </View>
+
+          </View>
+      )
+  }
+}
   render() {
 
     return (
       <Container>
         <Content>
-          <Header />
-          <View style={styles.container}>
+          <Header >
+            {
+              this.state.loggedIn == false ?
+                <Right>
+                  <View >
 
-          <View style={styles.btnContainer}>
+                    <TouchableOpacity
+                      // style={styles.signIn}
+                      onPress={() => { this.handleSignIn() }} >
+                      <View style={styles.view}>
+                        <FontAwesomeIcon icon={faSignInAlt} style={styles.loginicon} size={20} />
 
-            <View style={styles.btnContainerMiddle}>
-              <LinearGradient
-                colors={['#9d50bb', '#6e48aa']}
-                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                // style={{ height: 48, width: 200, alignItems: 'center', justifyContent: 'center', width: 200}}
-                style={[
-                  styles.button,
-                  { position: 'absolute', left: -100, top: 150 },
-                ]}
-              >
-                <TouchableOpacity
-                  onPress={() => {this.props.navigation.navigate('Eventlist', {opinion:'brave'}) }}
+                        <Text style={styles.loginText}>Login</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </Right>
+                :
+                <Right>
+                  <View style={styles.HeaderButton} >
+                    <TouchableOpacity
+                      onPress={() => { this.handleSignOut() }}
+                    >
+                      <View style={styles.view}>
+                        <FontAwesomeIcon icon={faSignOutAlt} style={styles.logoutIcon} size={20} />
+
+                        <Text style={styles.logoutText}>Logout</Text>
+                      </View>
+
+                    </TouchableOpacity>
+                  </View>
+                </Right>
+            }
+          </Header>   
+          {
+            this.state.loggedIn == false ?
+              <View>
+                <Text style={styles.text}>You need to LogIn</Text>
+              </View>
+              :
+              <View>
+
+              </View>
+          }  
+          {this.state.loggedIn &&    
+           <View style={styles.container}>
+
+            <View style={styles.btnContainer}>
+
+              <View style={styles.btnContainerMiddle}>
+                <LinearGradient
+                  colors={['#9d50bb', '#6e48aa']}
+                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                  style={[
+                    styles.button,
+                    { position: 'absolute', left: -100, top: 150 },
+                  ]}
                 >
-                  <Text style={styles.buttonText}> Brave</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-              <LinearGradient
-                colors={['#9d50bb', '#6e48aa']}
-                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                style={[styles.button, { top: 60 }]}
-              >
-                <TouchableOpacity
-                  onPress={() => {this.props.navigation.navigate('Eventlist', {opinion:'ambitious'}) }}
+                  <TouchableOpacity
+                    onPress={() => { 
+                      this.ShowButtonForm()
+                      // this.props.navigation.navigate('Eventlist', { opinion: 'brave' }) 
+                    }}
+                  >
+                    <Text style={styles.buttonText}> Brave</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+                <LinearGradient
+                  colors={['#9d50bb', '#6e48aa']}
+                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                  style={[styles.button, { top: 60 }]}
                 >
-                  <Text style={styles.buttonText}>Ambitious</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-              <LinearGradient
-                colors={['#9d50bb', '#6e48aa']}
-                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
+                  <TouchableOpacity
+                    onPress={() => { 
+                      this.ShowButtonForm()
+                      // this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
+                     }}
+                  >
+                    <Text style={styles.buttonText}>Ambitious</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+                <LinearGradient
+                  colors={['#9d50bb', '#6e48aa']}
+                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                  style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
 
-                <TouchableOpacity
-                  onPress={() => { this.props.navigation.navigate('Eventlist', {opinion:'kind'}) }}>
-                  <Text style={styles.buttonText}>kind</Text>
-                </TouchableOpacity>
-              </LinearGradient>
-              {/* </View> */}
+                  <TouchableOpacity
+                    onPress={() => { 
+                      this.ShowButtonForm()
+                      // this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) 
+                      }}>
+                    <Text style={styles.buttonText}>kind</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
+                {/* </View> */}
 
-              {/* <View style={styles.btnContainerMiddle}> */}
-              <LinearGradient
-                colors={['#9d50bb', '#6e48aa']}
-                start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
-                style={[
-                  styles.button,
-                  { position: 'absolute', top: 240 },
-                ]}>
-                <TouchableOpacity
-                  onPress={() => { this.props.navigation.navigate('Eventlist', {opinion:'optimistic'})}}
-                >
-                  <Text style={styles.buttonText}>Optimistic</Text>
-                </TouchableOpacity>
-              </LinearGradient>
+                {/* <View style={styles.btnContainerMiddle}> */}
+                <LinearGradient
+                  colors={['#9d50bb', '#6e48aa']}
+                  start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
+                  style={[
+                    styles.button,
+                    { position: 'absolute', top: 240 },
+                  ]}>
+                  <TouchableOpacity
+                    onPress={() => { 
+                      this.ShowButtonForm()
+                      // this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' }) 
+                    }}
+                  >
+                    <Text style={styles.buttonText}>Optimistic</Text>
+                  </TouchableOpacity>
+                </LinearGradient>
 
 
+              </View>
             </View>
-          </View>
-          </View>
+            {this.calendarForm()}
+          </View>}
 
         </Content>
       </Container>
@@ -140,7 +231,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // backgroundColor:'red',
-    
+
 
   },
   btnContainerMiddle: {
@@ -182,4 +273,24 @@ const styles = StyleSheet.create({
     width: 180,
     fontSize: 16
   },
+  //header
+  view: { flexDirection: 'row' },
+  loginicon: { color: 'white', marginTop: 3 },
+  loginText: { fontSize: 20, fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5 },
+  logoutIcon: { color: 'white', marginTop: 3, marginLeft: 10 },
+  logoutText: { fontWeight: 'bold', color: 'white', marginLeft: 5, marginBottom: 5, fontSize: 20, marginRight: 10 },
+  text: { fontSize: 20, fontWeight: "bold" },
+  //content button
+  create: {
+    backgroundColor: '#009688',
+    marginBottom: 20,
+    alignItems: 'center',
+    margin: 30,
+    width: 200, height: 60, borderRadius: 5
+},
+createtext: {
+    fontSize: 24,
+    color: 'white',
+    fontWeight: "bold", marginTop: 10
+},
 });

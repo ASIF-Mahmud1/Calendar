@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right ,Icon} from 'native-base';
 import { event, newEvents  } from '../../sample/data/Event'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck,faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
@@ -157,17 +157,31 @@ export default class extends React.Component {
                 <Content>
                     <Header>
                         <Left>
-                            <Button transparent onPress={() => { this.props.navigation.goBack() }}>
-                              <Text  style={styles.loginText}>Back</Text>
-                            </Button>
+                        <TouchableOpacity
+                                         style={styles.back}
+                                         onPress={() => this.props.navigation.goBack()}>
+                                        <View style={styles.view}>
+                                            <FontAwesomeIcon icon={faArrowLeft} style={styles.loginicon} size={20} />
+                                        </View>
+                                    </TouchableOpacity>
                         </Left>
                       <Right>
-                        {
+                      <View style={styles.HeaderButton} >
+                                    <TouchableOpacity
+                                        onPress={() => { this.handleSignOut() }}
+                                    >
+                                        <View style={styles.view}>
+                                            <FontAwesomeIcon icon={faSignOutAlt} style={styles.logoutIcon} size={20} />
+
+                                            <Text style={styles.logoutText}>Logout</Text>
+                                        </View>
+
+                                    </TouchableOpacity>
+                                </View>
+                        {/* {
                             this.state.loggedIn == false ?
                                 <View >
-                                    {/* <Left>
-                                        <Text>back</Text>
-                                    </Left> */}
+                                    
                                     <TouchableOpacity
                                         style={styles.signIn}
                                         onPress={() => { this.handleSignIn() }} >
@@ -191,20 +205,11 @@ export default class extends React.Component {
 
                                     </TouchableOpacity>
                                 </View>
-                        }
+                        } */}
 
                       </Right>
                     </Header>
-                    {
-                        this.state.loggedIn == false ?
-                            <View>
-                                <Text style={styles.text}>You need to LogIn</Text>
-                            </View>
-                            :
-                            <View>
-
-                            </View>
-                    }
+                   
 
 
                     {this.state.loggedIn &&
