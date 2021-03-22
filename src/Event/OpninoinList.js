@@ -148,7 +148,7 @@ export default class CounterApp extends Component {
 
                 this.props.navigation.navigate('Eventlist', { opinion: this.state.type }),
                 // this.passvalue()
-                this.setState({ viewButton: false, show: false })
+                this.setState({ viewButton: false,  brave: false,ambitous: false,kind: false,optimistic: false,type:[] })
 
 
               }}>
