@@ -13,7 +13,7 @@ export default class extends React.Component {
     state = {
         loggedIn: false,
         accessToken: '',
-        opinion:'',
+        opinion:[],
         type: '',
         indexValue:'',
         like:false,

@@ -18,11 +18,14 @@ export default class CounterApp extends Component {
     this.props = props;
 
     this.state = {
-      type: '',
+      type: [],
       loggedIn: false,
       accessToken: '',
       viewButton: false,
-      show:false
+      brave: false,
+      ambitous: false,
+      kind: false,
+      optimistic: false
     }
   };
 
@@ -51,10 +54,84 @@ export default class CounterApp extends Component {
   }
 
   ShowButtonForm = (value) => {
+    if (value == "brave") {
+      if(!this.state.brave){
+        this.state.type.push(value)
+
+      }
+      else{
+        this.state.type.pop(value)
+      }
+      this.setState({
+        viewButton: true,
+        type:this.state.type,
+        brave: !this.state.brave,
+      });
+      console.log(this.state.type)
+    }
+    else if (value == "ambitious") {
+      if(!this.state.ambitous){
+        this.state.type.push(value)
+
+      }
+      else{
+        this.state.type.pop(value)
+      }
+
+      this.setState({
+        viewButton: true,
+        type:this.state.type,
+        ambitous: !this.state.ambitous
+        //show:true,
+      });
+      console.log(this.state.type)
+
+    }
+    else if (value == "kind") {
+      if(!this.state.kind){
+        this.state.type.push(value)
+
+      }
+      else{
+        this.state.type.pop(value)
+      }
+
+      this.setState({
+        viewButton: true,
+        type: this.state.type,
+        kind: !this.state.kind
+        //show:true,
+      });
+      console.log(this.state.type)
+
+    }
+    else {
+      if(!this.state.optimistic){
+        this.state.type.push(value)
+
+      }
+      else{
+        this.state.type.pop(value)
+      }
+
+      this.setState({
+        viewButton: true,
+        type: this.state.type,
+        optimistic: !this.state.optimistic
+        //show:true,
+      });
+      console.log(this.state.type)
+
+    }
+
+    //console.log(this.state.type)
+  };
+  ShowButton = (value) => {
     this.setState({
-      viewButton: !this.state.viewButton,
+      viewButton: true,
       type: value,
-       show:!this.state.show,
+      ambitous: true
+      //show:true,
     });
     console.log(this.state.type)
   };
@@ -63,16 +140,16 @@ export default class CounterApp extends Component {
       return (
         <View>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          
+
 
             <TouchableOpacity
               style={styles.create}
               onPress={() => {
-               
+
 
                 this.passvalue()
-                this.setState({viewButton:false,show:false})
-             
+                this.setState({ viewButton: false, show: false })
+
 
               }}>
               <Text style={styles.createtext}>Show Content </Text>
@@ -85,10 +162,13 @@ export default class CounterApp extends Component {
     }
   }
   passvalue() {
-    { this.state.type == "ambitious" && this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' }) }
-    { this.state.type == "kind" && this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) }
-    {this.state.type == "brave" && this.props.navigation.navigate('Eventlist', { opinion: 'brave' })}
-    {this.state.type == "optimistic" && this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' })}
+    opinionlList = ["ambitious", "optimistic", "kind", "brave"]
+    this.props.navigation.navigate('Eventlist', { opinion: opinionlList[0] })
+
+    // { this.state.type == "ambitious" && this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' }) }
+    // { this.state.type == "kind" && this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) }
+    // {this.state.type == "brave" && this.props.navigation.navigate('Eventlist', { opinion: 'brave' })}
+    // {this.state.type == "optimistic" && this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' })}
   }
   render() {
 
@@ -96,6 +176,7 @@ export default class CounterApp extends Component {
       <Container>
         <Content>
           <Header >
+            <Title style={{ marginTop: 15, fontSize: 25, marginLeft: 5 }}>User Preference</Title>
             {
               this.state.loggedIn == false ?
                 <Right>
@@ -146,7 +227,7 @@ export default class CounterApp extends Component {
 
                 <View style={styles.btnContainerMiddle}>
                   <LinearGradient
-                    colors={this.state.show == true && this.state.type=='brave' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    colors={this.state.brave == true ? ['#CB356B', '#BD3F32'] : ['#9d50bb', '#6e48aa']}
                     start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
                     style={[
                       styles.button,
@@ -156,19 +237,18 @@ export default class CounterApp extends Component {
                     <TouchableOpacity
                       onPress={() => {
                         this.ShowButtonForm('brave')
-                        // this.props.navigation.navigate('Eventlist', { opinion: 'brave' }) 
                       }}
                     >
                       <Text style={styles.buttonText}> Brave</Text>
                     </TouchableOpacity>
                   </LinearGradient>
                   <LinearGradient
-                    colors={this.state.show == true && this.state.type=='ambitious' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    colors={this.state.ambitous == true ? ['#CB356B', '#BD3F32'] : ['#9d50bb', '#6e48aa']}
                     start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
                     style={[styles.button, { top: 60 }]}
                   >
                     <TouchableOpacity
-                   
+
                       onPress={() => {
                         this.ShowButtonForm('ambitious')
                       }}
@@ -177,7 +257,7 @@ export default class CounterApp extends Component {
                     </TouchableOpacity>
                   </LinearGradient>
                   <LinearGradient
-                    colors={this.state.show == true && this.state.type=='kind' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    colors={this.state.kind == true ? ['#CB356B', '#BD3F32'] : ['#9d50bb', '#6e48aa']}
                     start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
                     style={[styles.button, { position: 'absolute', left: 100, top: 150 }]}      >
 
@@ -188,9 +268,9 @@ export default class CounterApp extends Component {
                       <Text style={styles.buttonText}>kind</Text>
                     </TouchableOpacity>
                   </LinearGradient>
-              
+
                   <LinearGradient
-                    colors={this.state.show == true && this.state.type=='optimistic' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
+                    colors={this.state.optimistic == true ? ['#CB356B', '#BD3F32'] : ['#9d50bb', '#6e48aa']}
                     start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
                     style={[
                       styles.button,
@@ -209,7 +289,7 @@ export default class CounterApp extends Component {
                 </View>
                 {this.calendarForm()}
               </View>
-            
+
             </View>}
 
         </Content>
@@ -228,7 +308,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:50
+    marginBottom: 50
   },
   btnContainer: {
     flex: 1,
@@ -305,28 +385,28 @@ const styles = StyleSheet.create({
     fontWeight: "bold", marginTop: 15
   },
   //ambitious 
-  ambitous:{
-   
-      margin: 40,
-      width: 90,
-      height: 90,
-      borderRadius: 90,
-      justifyContent: 'center',
-      alignItems: 'center',
-      top:60,
-      backgroundColor:'red'
-    
-  },
-  Pressambitous:{
-   
+  ambitous: {
+
     margin: 40,
     width: 90,
     height: 90,
     borderRadius: 90,
     justifyContent: 'center',
     alignItems: 'center',
-    top:60,
-    backgroundColor:'black'
-  
-}
+    top: 60,
+    backgroundColor: 'red'
+
+  },
+  Pressambitous: {
+
+    margin: 40,
+    width: 90,
+    height: 90,
+    borderRadius: 90,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 60,
+    backgroundColor: 'black'
+
+  }
 });
