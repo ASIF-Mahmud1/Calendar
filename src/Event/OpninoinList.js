@@ -68,13 +68,11 @@ export default class CounterApp extends Component {
             <TouchableOpacity
               style={styles.create}
               onPress={() => {
-                // this.props.navigation.navigate('Eventlist') 
-                // this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
+               
 
                 this.passvalue()
                 this.setState({viewButton:false,show:false})
-                // {this.state.type == "ambitious" && this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })}
-                // {this.state.type == "kind" && this.props.navigation.navigate('Eventlist', { opinion: 'kind' })}
+             
 
               }}>
               <Text style={styles.createtext}>Show Content </Text>
@@ -170,11 +168,9 @@ export default class CounterApp extends Component {
                     style={[styles.button, { top: 60 }]}
                   >
                     <TouchableOpacity
-                    // style={this.state.show == true ?styles.ambitous:styles.Pressambitous}
-                    //  style={this.state.show == 'ambitious' ?[styles.button, { top: 60 }, {backgroundColor:'red'}]:[styles.button, { top: 60 }, {backgroundColor:'blue'}]}
+                   
                       onPress={() => {
                         this.ShowButtonForm('ambitious')
-                        // this.props.navigation.navigate('Eventlist', { opinion: 'ambitious' })
                       }}
                     >
                       <Text style={styles.buttonText}>Ambitious</Text>
@@ -188,14 +184,11 @@ export default class CounterApp extends Component {
                     <TouchableOpacity
                       onPress={() => {
                         this.ShowButtonForm('kind')
-                        // this.props.navigation.navigate('Eventlist', { opinion: 'kind' }) 
                       }}>
                       <Text style={styles.buttonText}>kind</Text>
                     </TouchableOpacity>
                   </LinearGradient>
-                  {/* </View> */}
-
-                  {/* <View style={styles.btnContainerMiddle}> */}
+              
                   <LinearGradient
                     colors={this.state.show == true && this.state.type=='optimistic' ? [ '#CB356B','#BD3F32']:['#9d50bb', '#6e48aa']}
                     start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
@@ -206,7 +199,6 @@ export default class CounterApp extends Component {
                     <TouchableOpacity
                       onPress={() => {
                         this.ShowButtonForm('optimistic')
-                        // this.props.navigation.navigate('Eventlist', { opinion: 'optimistic' }) 
                       }}
                     >
                       <Text style={styles.buttonText}>Optimistic</Text>
