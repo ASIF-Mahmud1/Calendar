@@ -17,10 +17,10 @@ var event = [
 like:false,
 dislike:false,
 usersOpininon: {
-  brave: 0.6,
-  ambitious: 0.2,
-  optimistic:0.1,
-  kind:0.1
+  brave: 0.5,
+  ambitious: 0.5,
+  optimistic:0.0,
+  kind:0.0
 }   
   },
   {

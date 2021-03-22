@@ -146,8 +146,8 @@ export default class CounterApp extends Component {
               style={styles.create}
               onPress={() => {
 
-
-                this.passvalue()
+                this.props.navigation.navigate('Eventlist', { opinion: this.state.type }),
+                // this.passvalue()
                 this.setState({ viewButton: false, show: false })
 
 
