@@ -23,7 +23,7 @@ export default class CounterApp extends Component {
       accessToken: '',
       viewButton: false,
       brave: false,
-      ambitous: false,
+      ambitious: false,
       kind: false,
       optimistic: false
     }
@@ -55,47 +55,30 @@ export default class CounterApp extends Component {
 
   ShowButtonForm = (value) => {
     if (value == "brave") {
-      if(!this.state.brave){
-        this.state.type.push(value)
+      !this.state.brave ?this.state.type.push(value): this.remove(value)
 
-      }
-      else{
-        this.state.type.pop(value)
-      }
       this.setState({
         viewButton: true,
-        type:this.state.type,
+        type: this.state.type,
         brave: !this.state.brave,
       });
       console.log(this.state.type)
     }
     else if (value == "ambitious") {
-      if(!this.state.ambitous){
-        this.state.type.push(value)
-
-      }
-      else{
-        this.state.type.pop(value)
-      }
+      
+      !this.state.ambitious ? this.state.type.push(value): this.remove(value)
 
       this.setState({
         viewButton: true,
-        type:this.state.type,
-        ambitous: !this.state.ambitous
-        //show:true,
+        type: this.state.type,
+        ambitious: !this.state.ambitious
       });
       console.log(this.state.type)
 
     }
     else if (value == "kind") {
-      if(!this.state.kind){
-        this.state.type.push(value)
-
-      }
-      else{
-        this.state.type.pop(value)
-      }
-
+      
+!this.state.kind ?this.state.type.push(value): this.remove(value)
       this.setState({
         viewButton: true,
         type: this.state.type,
@@ -106,13 +89,8 @@ export default class CounterApp extends Component {
 
     }
     else {
-      if(!this.state.optimistic){
-        this.state.type.push(value)
-
-      }
-      else{
-        this.state.type.pop(value)
-      }
+      !this.state.optimistic ? this.state.type.push(value): this.remove(value)
+      
 
       this.setState({
         viewButton: true,
@@ -126,15 +104,14 @@ export default class CounterApp extends Component {
 
     //console.log(this.state.type)
   };
-  ShowButton = (value) => {
-    this.setState({
-      viewButton: true,
-      type: value,
-      ambitous: true
-      //show:true,
-    });
-    console.log(this.state.type)
-  };
+  remove(value){
+    console.log("remove",value)
+    this.state.type.map((element, i) => {
+      if (element == value)
+        this.state.type.splice(i, 1)
+    })
+  }
+  
   calendarForm() {
     if (this.state.viewButton) {
       return (
@@ -148,7 +125,7 @@ export default class CounterApp extends Component {
 
                 this.props.navigation.navigate('Eventlist', { opinion: this.state.type }),
                 // this.passvalue()
-                this.setState({ viewButton: false,  brave: false,ambitous: false,kind: false,optimistic: false,type:[] })
+                this.setState({ viewButton: false,  brave: false,ambitious: false,kind: false,optimistic: false,type:[] })
 
 
               }}>
@@ -243,7 +220,7 @@ export default class CounterApp extends Component {
                     </TouchableOpacity>
                   </LinearGradient>
                   <LinearGradient
-                    colors={this.state.ambitous == true ? ['#CB356B', '#BD3F32'] : ['#9d50bb', '#6e48aa']}
+                    colors={this.state.ambitious == true ? ['#CB356B', '#BD3F32'] : ['#9d50bb', '#6e48aa']}
                     start={{ x: 0.0, y: 1.0 }} end={{ x: 1.0, y: 1.0 }}
                     style={[styles.button, { top: 60 }]}
                   >
@@ -385,7 +362,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold", marginTop: 15
   },
   //ambitious 
-  ambitous: {
+  ambitious: {
 
     margin: 40,
     width: 90,
