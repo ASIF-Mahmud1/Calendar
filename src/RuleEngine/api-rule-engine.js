@@ -183,6 +183,51 @@ const getEventsBasedOnOpinion= (eventList, opinion)=>{
 // const eventBasedOnOpinion=  getEventsBasedOnOpinion(newEvents, "brave")
 // console.log("Prefered Events \n",eventBasedOnOpinion)
 
+const printEvent=(eventList)=>{
+  eventList.forEach((singleEvent)=>{
+    console.log(singleEvent.title," ", singleEvent.totalWeightedOpinion)
+  })
+}
+
+const sortEventsBasedOnScore=(eventList)=>{
+  let result = eventList.map((singleEvent)=>{
+    let totalWeightedOpinion=0
+    Object.entries(singleEvent['weightedOpinion']).forEach(([key, value]) => {
+      totalWeightedOpinion=totalWeightedOpinion+ value
+    })
+     singleEvent["totalWeightedOpinion"]= totalWeightedOpinion
+     return singleEvent
+  })
+   result= result.sort(function (firstEvent, secondEvent) {
+  return secondEvent['totalWeightedOpinion'] - firstEvent['totalWeightedOpinion']
+})
+  return result
+}
+
+const getEventsBasedOnMultipleOpinions= (eventList, traits)=>{                    // traits: list of traits user want to develop
+ let result= eventList.map((singleEvent, index)=>{
+   singleEvent['weightedOpinion']= {}
+   traits.forEach((trait)=>{
+    const authorOpinion = singleEvent['tag'].find(tag => tag == trait)              // search for trait in the tag list
+    
+    if ( trait== authorOpinion )                                                    // author opinion matches, with trait we are  looking for
+    {
+      singleEvent['weightedOpinion'][trait]= singleEvent["usersOpininon"][trait]+ 1   // trait is found in the tag list. So more priority is given to event 
+    }
+    else                                                                             // author's opinion doesn't match with the trait we are looking for
+    {
+      singleEvent['weightedOpinion'][trait]= singleEvent["usersOpininon"][trait]    // priority is equivalent to userOpinion for event
+    }
+   })
+   return singleEvent
+ })
+ result= sortEventsBasedOnScore(result)
+ printEvent(result)
+return result
+}
+
+// const eventBasedOnMultipleOpinion=  getEventsBasedOnMultipleOpinions(newEvents,["kind","brave"])
+// printEvent(eventBasedOnMultipleOpinion)
 
 
 //  // Shuffle array
@@ -194,5 +239,6 @@ const getEventsBasedOnOpinion= (eventList, opinion)=>{
 export{
     getTagFrequencyTable,
     recommendEvents,
-    getEventsBasedOnOpinion
+    getEventsBasedOnOpinion,
+    getEventsBasedOnMultipleOpinions
 }
