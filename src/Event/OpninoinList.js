@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
@@ -83,7 +82,6 @@ export default class CounterApp extends Component {
         viewButton: true,
         type: this.state.type,
         kind: !this.state.kind
-        //show:true,
       });
       console.log(this.state.type)
 
@@ -96,13 +94,12 @@ export default class CounterApp extends Component {
         viewButton: true,
         type: this.state.type,
         optimistic: !this.state.optimistic
-        //show:true,
+       
       });
       console.log(this.state.type)
 
     }
 
-    //console.log(this.state.type)
   };
   remove(value){
     console.log("remove",value)
