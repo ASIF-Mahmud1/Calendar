@@ -7,7 +7,7 @@ import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, fa
 import { listCalendar, createEvent, listEvents, createCalendar } from '../calendar/google-calendar.api'
 import { configureGoogleSignIn, getCurrentUser, signIn, signOut } from '../calendar/google-auth'
 import moment from 'moment'
-import {getTagFrequencyTable, recommendEvents, getEventsBasedOnOpinion} from '../RuleEngine/api-rule-engine'
+import {getTagFrequencyTable, recommendEvents,  getEventsBasedOnMultipleOpinions} from '../RuleEngine/api-rule-engine'
 import EventCategory from './EventCategory'
 export default class extends React.Component {
     state = {
@@ -47,7 +47,7 @@ export default class extends React.Component {
                 let table= getTagFrequencyTable(this.state.userProfile)
                 //alert(JSON.stringify(table))
                 console.log("table",table)
-                const eventBasedOnOpinion= getEventsBasedOnOpinion(event, opinion)
+                const eventBasedOnOpinion= getEventsBasedOnMultipleOpinions(event, opinion)
                 this.setState({ accessToken: response.success.accessToken, loggedIn: true,  allEvents: eventBasedOnOpinion},()=>{
                     const  allEvents= this.state.allEvents
                     allEvents.map((event)=>{
@@ -133,9 +133,9 @@ export default class extends React.Component {
             liked: true
           }
         const opinion=this.props.route.params.opinion  
-        const eventBasedOnOpinion= getEventsBasedOnOpinion(newEvents, opinion)  
+        const eventBasedOnOpinion= getEventsBasedOnMultipleOpinions(newEvents, opinion)  
        const userProfile= state.userProfile
-       const featuredEvent= state.featuredEvents
+     //  const featuredEvent= state.featuredEvents
    //    featuredEvent.push(singleEvent)
        userProfile['eventsAddedToCalendar'].push(eventInfo)
        this.setState({userProfile:userProfile},()=>{

@@ -253,208 +253,208 @@ usersOpininon: {
 
 const  newEvents = [
  
-  // {
-  //   eventId: 11,
-  //   title: "Art 101: Acrylic Pour Painting",
-  //   summary: "A free, two-hour painting workshop on Zoom, hosted by the Appleton Museum of Art.",
-  //   tag: ["art"],
-  //   endTime: {
-  //     "dateTime": "2021-03-16T16:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-03-16T14:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/image12.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.5,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.2
-  //   }   
-  // },
-  // {
-  //   eventId: 12,
-  //   title: "Kaushalya UK Women's Day 2021",
-  //   summary: "International Women's Day celebration with Kaushalya UK - full of fun, inspiration, courage and appreciations.",
-  //   tag: ["empowerment"],
-  //   endTime: {
-  //     "dateTime": "2021-03-15T18:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-03-15T15:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/image13.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.5,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.2
-  //   }   
-  // },
-  // {
-  //   eventId: 13,
-  //   title: "Data Science Day 2021",
-  //   summary: "International Women's Day celebration with Kaushalya UK - full of fun, inspiration, courage and appreciations.",
-  //   tag: ["science"],
-  //   endTime: {
-  //     "dateTime": "2021-04-21T17:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-04-21T14:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/image14.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.5,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.2
-  //   }   
-  // },
-  // {
-  //   eventId: 14,
-  //   title: "Hiking in the White Mountains",
-  //   summary: "Join the experts at Helly Hansen for a small group presentation on the White Mountains",
-  //   tag: ["adventure"],
-  //   endTime: {
-  //     "dateTime": "2021-03-21T14:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-03-21T13:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/image15.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.5,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.2
-  //   }   
-  // },
-  // {
-  //   eventId: 15,
-  //   title: "LAKE DISTRICT 5 PEAKS CHALLENGE",
-  //   summary: "Prepare for an epic challenge through the rugged and dramatic landscape of the Lake District, as you tackle five of England’s most demanding peaks, including its highest – Scafell Pike",
-  //   tag: ["adventurous"],
-  //   endTime: {
-  //     "dateTime": "2021-08-13T14:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-08-13T02:00:00.000Z",
-  //     "timeZone": "BST"
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/image16.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.1,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.6
-  //   }   
-  // },
-  // {
-  //   eventId: 16,
-  //   title: "Trail Running",
-  //   summary: "Although trail running is similar to running on the roads, there are some differences to make note of before you hit the trailhead. To help you get started, we pulled together a list of our best trail running tips that will guide you. While they may seem like a lot, they’re not hard to do!",
-  //   tag: ["adventurous"],
-  //   endTime: {
-  //     "dateTime": "2021-03-04T14:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-03-04T12:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/featuredEvents/trail-run.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.5,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.2
-  //   }   
+  {
+    eventId: 11,
+    title: "Art 101: Acrylic Pour Painting",
+    summary: "A free, two-hour painting workshop on Zoom, hosted by the Appleton Museum of Art.",
+    tag: ["art"],
+    endTime: {
+      "dateTime": "2021-03-16T16:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-03-16T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image12.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
+  },
+  {
+    eventId: 12,
+    title: "Kaushalya UK Women's Day 2021",
+    summary: "International Women's Day celebration with Kaushalya UK - full of fun, inspiration, courage and appreciations.",
+    tag: ["empowerment"],
+    endTime: {
+      "dateTime": "2021-03-15T18:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-03-15T15:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image13.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
+  },
+  {
+    eventId: 13,
+    title: "Data Science Day 2021",
+    summary: "International Women's Day celebration with Kaushalya UK - full of fun, inspiration, courage and appreciations.",
+    tag: ["science"],
+    endTime: {
+      "dateTime": "2021-04-21T17:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-04-21T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image14.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
+  },
+  {
+    eventId: 14,
+    title: "Hiking in the White Mountains",
+    summary: "Join the experts at Helly Hansen for a small group presentation on the White Mountains",
+    tag: ["adventure"],
+    endTime: {
+      "dateTime": "2021-03-21T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-03-21T13:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image15.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
+  },
+  {
+    eventId: 15,
+    title: "LAKE DISTRICT 5 PEAKS CHALLENGE",
+    summary: "Prepare for an epic challenge through the rugged and dramatic landscape of the Lake District, as you tackle five of England’s most demanding peaks, including its highest – Scafell Pike",
+    tag: ["adventurous"],
+    endTime: {
+      "dateTime": "2021-08-13T14:00:00.000Z",
+      "timeZone": "BST"
+    },
+    startTime: {
+      "dateTime": "2021-08-13T02:00:00.000Z",
+      "timeZone": "BST"
+    },
+    iconshow: true,
+    image: require("../image/image16.jpg"),
+    usersOpininon: {
+      brave: 0.1,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.6
+    }   
+  },
+  {
+    eventId: 16,
+    title: "Trail Running",
+    summary: "Although trail running is similar to running on the roads, there are some differences to make note of before you hit the trailhead. To help you get started, we pulled together a list of our best trail running tips that will guide you. While they may seem like a lot, they’re not hard to do!",
+    tag: ["adventurous"],
+    endTime: {
+      "dateTime": "2021-03-04T14:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-03-04T12:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/featuredEvents/trail-run.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
-  // },
-  // {
-  //   eventId: 17,
-  //   title: "Music Festival",
-  //   summary:"The Royal Albert Hall is a concert hall on the northern edge of South Kensington, London. One of the United Kingdom's most treasured and distinctive buildings, it is held in trust for the nation and managed by a registered charity. " ,
-  //   tag: ["art"],
-  //   endTime: {
-  //     "dateTime": "2021-03-12T20:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-03-12T16:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/featuredEvents/art.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.6,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.1
-  //   }   
+  },
+  {
+    eventId: 17,
+    title: "Music Festival",
+    summary:"The Royal Albert Hall is a concert hall on the northern edge of South Kensington, London. One of the United Kingdom's most treasured and distinctive buildings, it is held in trust for the nation and managed by a registered charity. " ,
+    tag: ["art"],
+    endTime: {
+      "dateTime": "2021-03-12T20:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-03-12T16:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/featuredEvents/art.jpg"),
+    usersOpininon: {
+      brave: 0.6,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.1
+    }   
 
-  // },
-  // {
-  //   eventId: 18,
-  //   title: "Will AI take over the World ?",
-  //   summary: "While narrow AI can outperform humans in some tasks, there's little to suggest that more general AI that can emulate humans' ability to respond to many different tasks will be delivered and put humans at risk in the near future. Even without a singularity, AI will have a dramatic impact on human society.",
-  //   tag: ["science"],
-  //   endTime: {
-  //     "dateTime": "2021-04-04T14:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-04-04T12:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/featuredEvents/science.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.5,
-  //     ambitious: 0.2,
-  //     optimistic:0.1,
-  //     kind:0.2
-  //   }   
+  },
+  {
+    eventId: 18,
+    title: "Will AI take over the World ?",
+    summary: "While narrow AI can outperform humans in some tasks, there's little to suggest that more general AI that can emulate humans' ability to respond to many different tasks will be delivered and put humans at risk in the near future. Even without a singularity, AI will have a dramatic impact on human society.",
+    tag: ["science"],
+    endTime: {
+      "dateTime": "2021-04-04T14:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-04-04T12:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/featuredEvents/science.jpg"),
+    usersOpininon: {
+      brave: 0.5,
+      ambitious: 0.2,
+      optimistic:0.1,
+      kind:0.2
+    }   
 
-  // },
-  // {
-  //   eventId: 19,
-  //   title: " Girls Inc. | Inspiring All Girls to be Strong, Smart, & Bold",
-  //   summary: "Our comprehensive approach addresses all aspects of a girl’s life and helps her discover and develop her inherent strengths. Girls receive programming to grow up healthy, educated, and independent.",
-  //   tag: ["empowerment"],
-  //   endTime: {
-  //     "dateTime": "2021-03-05T14:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   startTime: {
-  //     "dateTime": "2021-03-05T12:00:00.000Z",
-  //     "timeZone": "BST" // 'America/Los_Angeles'
-  //   },
-  //   iconshow: true,
-  //   image: require("../image/featuredEvents/empowerment.jpg"),
-  //   usersOpininon: {
-  //     brave: 0.2,
-  //     ambitious: 0.6,
-  //     optimistic:0.1,
-  //     kind:0.1
-  //   }   
+  },
+  {
+    eventId: 19,
+    title: " Girls Inc. | Inspiring All Girls to be Strong, Smart, & Bold",
+    summary: "Our comprehensive approach addresses all aspects of a girl’s life and helps her discover and develop her inherent strengths. Girls receive programming to grow up healthy, educated, and independent.",
+    tag: ["empowerment"],
+    endTime: {
+      "dateTime": "2021-03-05T14:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    startTime: {
+      "dateTime": "2021-03-05T12:00:00.000Z",
+      "timeZone": "BST" // 'America/Los_Angeles'
+    },
+    iconshow: true,
+    image: require("../image/featuredEvents/empowerment.jpg"),
+    usersOpininon: {
+      brave: 0.2,
+      ambitious: 0.6,
+      optimistic:0.1,
+      kind:0.1
+    }   
 
-  // }
+  }
 ]
 export {
   event,
