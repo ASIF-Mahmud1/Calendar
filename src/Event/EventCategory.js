@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity,StyleSheet,Image } from 'react-native';
-import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right } from 'native-base';
+import { List, ListItem, Left, Body, Content, Header, Container, Label, Button, Right, Badge } from 'native-base';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faCalendarPlus, faThumbsDown, faThumbsUp, faSignInAlt, faSignOutAlt, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
@@ -49,6 +49,18 @@ export default function SingleEvent(props) {
                                       
 
                                             <Text style={styles.summary}>{singleEvent.summary}</Text>
+
+                                            <View style={styles.badgeContainer}> 
+                                            {
+                                                singleEvent['tag'].map((tag, index)=>{
+                                                    return(
+                                                            <Badge  style= {index%2==0 ?styles.blackBadge:styles.redBadge }>
+                                                              <Text style={styles.badgeText}>{tag}</Text>
+                                                            </Badge>
+                                                    ) 
+                                                })
+                                            }
+                                              </View>
                                             <View style={styles.opinion}>
                                                 <Button
                                                     style={ singleEvent["userOpinion"] == "brave" ? styles.PressbraveButton : styles.braveButton}
@@ -174,6 +186,22 @@ const styles = StyleSheet.create({
     featuredEvent:{
         color: "green",
         fontWeight:"bold"
+    },
+    badgeText:{
+        color: 'white',
+        marginHorizontal:8,
+        fontSize:14,
+        fontWeight: 'bold'
+    },
+    blackBadge:{
+        backgroundColor: 'black',
+        marginHorizontal: 5, paddingHorizontal:40
+    },
+    redBadge:{
+        backgroundColor: 'red'
+    },
+    badgeContainer:{
+        flexDirection: 'row', marginTop: 10 
     }
 
 });
