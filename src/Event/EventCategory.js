@@ -54,7 +54,7 @@ export default function SingleEvent(props) {
                                             {
                                                 singleEvent['tag'].map((tag, index)=>{
                                                     return(
-                                                            <Badge  style= {index%2==0 ?styles.blackBadge:styles.redBadge }>
+                                                            <Badge  key={index} style= {index%2==0 ?styles.blackBadge:styles.redBadge }>
                                                               <Text style={styles.badgeText}>{tag}</Text>
                                                             </Badge>
                                                     ) 
@@ -161,10 +161,10 @@ const styles = StyleSheet.create({
     opinion:{ flexDirection: 'row', marginTop: 10 },
     braveButton: { width: "30%", backgroundColor: "#dd9d2b", marginRight: 20 },
     PressbraveButton: { width: "30%", backgroundColor: "#dd9d2b", borderColor: 'grey', marginRight: 20, borderWidth: 3 },
-    BraveText:{ color: 'white', margin: 22, fontSize: 18 },
+    BraveText:{ color: 'white', margin: 15, fontSize: 18 },
     AmbitiousButton: { width: 120, backgroundColor: "#2f96e3" },
     PressAmbitiousButton: { width: 140, backgroundColor: "#2f96e3", borderColor: 'grey', borderWidth: 3 },
-    AmbitiousText:{ color: 'white', margin: 22, fontSize: 18,textAlign:'center' },
+    AmbitiousText:{ color: 'white', margin: 22, fontSize: 18,textAlign:'center',margin: 15 },
     status:{ flexDirection: 'row', marginTop: 10 },
     likeButton:{ marginLeft: 30 },
     dislikeButton:{ marginLeft: 80 },

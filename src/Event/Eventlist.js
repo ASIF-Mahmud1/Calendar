@@ -40,7 +40,7 @@ export default class extends React.Component {
         this.props.navigation.addListener('focus', async () => {
            
             const opinion=this.props.route.params.opinion
-            alert(JSON.stringify( opinion)) 
+         //   alert(JSON.stringify( opinion)) 
             configureGoogleSignIn()
             let response = await getCurrentUser();
             if (response.success) {
